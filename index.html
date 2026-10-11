@@ -1,279 +1,931 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>Dimitri Cole Designs.</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-		<meta name="description" content="Dimitri Cole Designs — freelance web design. Clean, fast websites for small businesses and passion projects." />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="stylesheet" href="assets/css/polish.css" />
-		<link rel="icon" href="images/mountain.png">
-		<meta property="og:title" content="Dimitri Cole Designs." />
-		<meta property="og:description" content="Freelance Web Design" />
-		<meta property="og:url" content="https://www.dimitricoledesigns.com/" />
-		<meta property="og:image" content="https://www.dimitricoledesigns.com/images/programming_art.jpg" />
-		<meta name="twitter:card" content="summary_large_image">
-		<meta name="twitter:title" content="Dimitri Cole Designs.">
-		<meta name="twitter:description" content="Freelance Web Design">
-		<meta name="twitter:image" content="https://www.dimitricoledesigns.com/images/programming_art.jpg">
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
-		<!-- Wrapper -->
-			<div id="wrapper">
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dimitri Cole Designs.</title>
+<meta name="description" content="Dimitri Cole Designs, freelance web design. Clean, fast websites for small businesses and passion projects.">
+<meta name="theme-color" content="#000000">
+<link rel="canonical" href="https://dimitricoledesigns.com/">
+<link rel="icon" href="images/mountain.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Dimitri Cole Designs.">
+<meta property="og:description" content="Freelance web design by Dimitri Cole Restaino in New York. Six sites, cut like a film.">
+<meta property="og:url" content="https://dimitricoledesigns.com/">
+<meta property="og:image" content="https://dimitricoledesigns.com/images/og-showreel.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The words Dimitri Cole Designs in tall white letters on black, under a small snow-capped mountain.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,300..900&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&display=swap" rel="stylesheet">
+<script>
+  /* The reel plays only on a screen with room for it (340x540 in portrait, 640x361 in landscape), when motion is welcome
+     and no contrast theme is on. Otherwise (a small or zoomed-in screen, reduced motion, a contrast theme, print, or no
+     JavaScript) the page is a calm vertical sequence. The page decides here at load, and later only when it must
+     (see decide() and fit()), so a toolbar showing or hiding never switches it. */
+  const REEL = ['(orientation: portrait) and (min-width: 340px) and (min-height: 540px)', '(orientation: landscape) and (min-width: 640px) and (min-height: 361px)']
+    .map(room => 'screen and (prefers-reduced-motion: no-preference) and (forced-colors: none) and ' + room).join(', ');
+  if (window.matchMedia && matchMedia(REEL).matches) document.documentElement.classList.add('motion', 'is-shut');
+</script>
+<style>
+  :root {
+    --matte: #000000;      /* letterbox bars and the dark between reels */
+    --tungsten: #f3eadb;   /* projector-bulb white for type */
+    --leader: #a89f92;     /* film-leader grey for quiet text */
+    --dim: #6f685f;        /* unplayed reel segments */
+    --grade: var(--tungsten);
+    --bar: 72px;
+    --bar-b: 72px;
+    --gutter: clamp(16px, 4.4vw, 72px);
+    --display: "Big Shoulders", "Big Shoulders Display", "Arial Narrow", sans-serif;
+    --text: "Newsreader", "Iowan Old Style", Georgia, serif;
+  }
 
-				<!-- Header -->
-					<header id="header">
-						<div class="inner">
+  *, *::before, *::after { box-sizing: border-box; }
+  html { color-scheme: dark; background: var(--matte); -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--matte);
+    color: var(--tungsten);
+    font-family: var(--text);
+    font-size: clamp(1rem, .95rem + .2vw, 1.125rem);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* in the calm sequence a long word or address wraps instead of running off a narrow or text-spaced screen */
+  html:not(.motion) { overflow-wrap: anywhere; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  h1, h2, h3, p, figure { margin: 0; }
 
-							<!-- Logo -->
-								<a href="index.html" class="logo">
-									<span class="symbol"><img src="images/mountain.png" alt="" /></span><span class="title">Dimitri Cole Designs.</span>
-								</a>
+  :focus-visible {
+    outline: 3px solid var(--tungsten);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 7px var(--matte);
+    border-radius: 2px;
+  }
+  [tabindex="-1"]:focus { outline: none; box-shadow: none; }
 
-							<!-- Nav -->
-								<nav>
-									<ul>
-										<li><a href="#menu">Menu</a></li>
-									</ul>
-								</nav>
+  .sr {
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip-path: inset(50%); white-space: nowrap;
+  }
+  .skip {
+    position: fixed; z-index: 60; left: 16px; top: -120px;
+    padding: 12px 18px; background: var(--tungsten); color: var(--matte);
+    font: 700 1.0625rem/1 var(--display); text-decoration: none;
+  }
+  .skip:focus { top: 12px; }
 
-						</div>
-					</header>
+  /* ---------- Top bar ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 20;
+    min-height: var(--bar);
+    display: flex; flex-wrap: wrap; align-items: center; gap: clamp(16px, 2.4vw, 36px);
+    padding-inline: var(--gutter);
+    background: var(--matte);
+    overflow-x: clip;
+  }
+  .brand {
+    display: inline-flex; align-items: center; gap: 12px;
+    min-height: 44px; margin-right: auto;
+    font: 700 1.1875rem/1 var(--display); letter-spacing: .01em;
+    text-decoration: none; white-space: nowrap;
+  }
+  .brand svg { width: 36px; height: auto; flex: none; }
+  .reels { display: flex; align-items: center; }
+  .reels ol {
+    display: flex; gap: 6px; margin: 0; padding: 0; list-style: none;
+  }
+  .reels li { position: relative; }
+  .reels ol a {
+    position: relative; display: block; width: 34px; height: 44px;
+    text-decoration: none;
+  }
+  .seg {
+    position: absolute; left: 0; right: 0; top: 50%; height: 3px; margin-top: -1.5px;
+    background: var(--dim); overflow: hidden;
+  }
+  .seg::after {
+    content: ""; position: absolute; inset: 0;
+    background: var(--c);
+    transform: scaleX(var(--fill, 0)); transform-origin: 0 50%;
+  }
+  .reels ol a:hover .seg { background: var(--leader); }
+  .tip {
+    position: absolute; top: calc(100% + 2px); left: 50%; transform: translateX(-50%);
+    padding: 6px 10px; background: var(--matte); white-space: nowrap;
+    font: 600 .9375rem/1 var(--display); letter-spacing: .02em; color: var(--tungsten);
+    opacity: 0; pointer-events: none;
+  }
+  .reels ol a:hover .tip, .reels ol a:focus-visible .tip { opacity: 1; }
+  .to-contact {
+    display: inline-flex; align-items: center; min-height: 44px;
+    font: 700 1.0625rem/1 var(--display); letter-spacing: .03em;
+    text-underline-offset: 6px; text-decoration-thickness: 1px; text-decoration-color: var(--leader);
+  }
 
-				<!-- Menu -->
-					<nav id="menu">
-						<h2>Menu</h2>
-						<ul>
-							<li><a href="index.html">Home</a></li>
-							<li><a href="about.html">About Me</a></li>
-						</ul>
-					</nav>
+  /* ---------- Shared type ---------- */
+  .title {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(3.5rem, min(10.5vw, 18vh), 10rem);
+    line-height: .86;
+    letter-spacing: -.004em;
+    text-wrap: balance;
+  }
+  .card { display: flex; flex-direction: column; align-items: flex-start; }
+  .year {
+    order: -1;
+    margin-bottom: .45em;
+    font: 500 clamp(1.25rem, 1rem + .8vw, 1.875rem)/1 var(--display);
+    letter-spacing: .02em;
+    color: var(--grade);
+    font-variant-numeric: tabular-nums;
+  }
+  .line {
+    max-width: 27em;
+    margin: 1em 0 1em;
+    font-style: italic;
+    font-size: clamp(1.0625rem, .92rem + .48vw, 1.375rem);
+    line-height: 1.45;
+    text-wrap: pretty;
+  }
+  .sub {
+    max-width: 40em;
+    color: var(--tungsten);
+    font-size: clamp(1rem, .86rem + .42vw, 1.3125rem);
+    line-height: 1.42;
+    text-wrap: balance;
+  }
+  .visit {
+    display: inline-flex; align-items: center; gap: .45em;
+    min-height: 44px; margin-top: .6em;
+    font: 700 clamp(1.0625rem, .98rem + .3vw, 1.3125rem)/1 var(--display);
+    letter-spacing: .03em;
+    text-decoration: underline;
+    text-decoration-color: var(--grade);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 7px;
+  }
+  .visit svg { width: .8em; height: .8em; flex: none; }
+  .visit:hover { text-decoration-thickness: 4px; }
 
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
-							<header>
-								<h1>Hi, I'm Dimitri!</h1>
-								<p>By day I lead customer solutions at a fintech company; the rest of the time I build smaller passion projects as life allows.<br>Find some of my most recent work below, and please reach out if you would like to work together!</p>
-							</header>
-							<section class="tiles">
-								<article class="style2">
-									<span class="image">
-										<img class="mark-left" src="images/dimitricoleScreenshot-min.jpg?v=2" alt="Screenshot of dimitricole.com" />
-									</span>
-									<a href="https://www.dimitricole.com">
-										<h4>dimitricole.com</h4>
-										<div class="content">
-											<p>This is a website that I worked on to showcase my own resume.</p>
-										</div>
-									</a>
-								</article>
-								<article class="style1">
-									<span class="image">
-										<img class="mark-left" src="images/snowyghostScreenshot-min.jpg?v=2" alt="Screenshot of snowyghost.com" />
-									</span>
-									<a href="https://snowyghost.com">
-										<h4>snowyghost.com</h4>
-										<div class="content">
-											<p>This is the home of Snowy Ghost LLC, my app company behind Ovenlight, Glitch, Dimm and Whengo.</p>
-										</div>
-									</a>
-								</article>
-								<article class="style5">
-									<span class="image">
-										<img src="images/ovenlightScreenshot-min.jpg" alt="Screenshot of ovenlight.app" />
-									</span>
-									<a href="https://ovenlight.app">
-										<h4>ovenlight.app</h4>
-										<div class="content">
-											<p>This is the website for Ovenlight, my iPhone app that opens your own web apps behind Face ID.</p>
-										</div>
-									</a>
-								</article>
-								<article class="style6">
-									<span class="image">
-										<img class="mark-left" src="images/playglitchgameScreenshot-min.jpg" alt="Screenshot of playglitchgame.com" />
-									</span>
-									<a href="https://playglitchgame.com">
-										<h4>playglitchgame<wbr>.com</h4>
-										<div class="content">
-											<p>This is the website for Glitch, my party game of robots, humans and hidden roles.</p>
-										</div>
-									</a>
-								</article>
-								<article class="style3">
-									<span class="image">
-										<img src="images/rhinelanderScreenshot-min.jpg" alt="Screenshot of rhinelander.nyc" />
-									</span>
-									<a href="https://www.rhinelander.nyc">
-										<h4>rhinelander.nyc</h4>
-										<div class="content">
-											<p>This is a website for an auto body shop located in New York City.</p>
-										</div>
-									</a>
-								</article>
-								<article class="style4">
-									<span class="image">
-										<img src="images/patricktheartistScreenshot2-min.jpg" alt="Screenshot of patricktheartist.com" />
-									</span>
-									<a href="https://www.patricktheartist.com">
-										<h4>patricktheartist<wbr>.com</h4>
-										<div class="content">
-											<p>This is a website for the best artist that I know.</p>
-										</div>
-									</a>
-								</article>
-								<!-- <article class="style3">
-									<span class="image">
-										<img src="images/pic03.jpg" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>Feugiat</h2>
-										<div class="content">
-											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-										</div>
-									</a>
-								</article> -->
-								<!-- <article class="style4">
-									<span class="image">
-										<img src="images/pic04.jpg" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>Tempus</h2>
-										<div class="content">
-											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-										</div>
-									</a>
-								</article>
-								<article class="style5">
-									<span class="image">
-										<img src="images/pic05.jpg" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>Aliquam</h2>
-										<div class="content">
-											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-										</div>
-									</a>
-								</article>
-								<article class="style6">
-									<span class="image">
-										<img src="images/pic06.jpg" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>Veroeros</h2>
-										<div class="content">
-											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-										</div>
-									</a>
-								</article>
-								<article class="style2">
-									<span class="image">
-										<img src="images/pic07.jpg" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>Ipsum</h2>
-										<div class="content">
-											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-										</div>
-									</a>
-								</article>
-								<article class="style3">
-									<span class="image">
-										<img src="images/pic08.jpg" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>Dolor</h2>
-										<div class="content">
-											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-										</div>
-									</a>
-								</article>
-								<article class="style1">
-									<span class="image">
-										<img src="images/pic09.jpg" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>Nullam</h2>
-										<div class="content">
-											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-										</div>
-									</a>
-								</article>
-								<article class="style5">
-									<span class="image">
-										<img src="images/pic10.jpg" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>Ultricies</h2>
-										<div class="content">
-											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-										</div>
-									</a>
-								</article>
-								<article class="style6">
-									<span class="image">
-										<img src="images/pic11.jpg" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>Dictum</h2>
-										<div class="content">
-											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-										</div>
-									</a>
-								</article>
-								<article class="style4">
-									<span class="image">
-										<img src="images/pic12.jpg" alt="" />
-									</span>
-									<a href="generic.html">
-										<h2>Pretium</h2>
-										<div class="content">
-											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-										</div>
-									</a>
-								</article> -->
-							</section>
-						</div>
-					</div>
+  /* ---------- Calm sequence (reduced motion, or no JavaScript) ---------- */
+  .stage { position: relative; }
+  .frame, .counter, .cue { display: none; }
 
-				<!-- Footer -->
-					<footer id="footer">
-						<div class="inner">
-							<section>
-								<h2>Get in touch</h2>
-								<ul class="icons">
-									<li><a href="https://twitter.com/cole_dimitri" class="icon brands style2 fa-twitter"><span
-										class="label">Twitter</span></a></li>
-							<li><a href="https://www.facebook.com/dimitri.restaino"
-									class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a>
-							</li>
-							<li><a href="https://www.instagram.com/dimitri_cole" class="icon brands style2 fa-instagram"><span
-										class="label">Instagram</span></a>
-							</li>
-							<li><a href="https://www.linkedin.com/in/dimitricole/"
-									class="icon brands style2 fa-linkedin-in"><span class="label">LinkedIn</span></a>
-							</li>
-							<li><a href="mailto:dimitri.code@gmail.com?Subject=Hello%20There"
-									class="icon style2 fa-envelope"><span class="label">Email</span></a></li>
-									<li><a href="tel:914-610-9012" class="icon solid style2 fa-phone"><span class="label">Phone</span></a></li>
-								</ul>
-							</section>
-							<ul class="copyright">
-								<li>&copy; Dimitri Cole Designs.</li>
-							</ul>
-						</div>
-					</footer>
+  .open {
+    min-height: calc(100vh - var(--bar));
+    display: grid; place-items: center;
+    padding: clamp(48px, 10vh, 120px) var(--gutter);
+    text-align: center;
+  }
+  .open .card { align-items: center; }
+  .open .mark { width: clamp(72px, 8vw, 116px); height: auto; margin-bottom: clamp(16px, 3vh, 28px); }
+  .open .title { font-size: clamp(3.25rem, min(9vw, 15vh), 9.5rem); }
+  .credit {
+    margin-top: .9em;
+    font-style: italic; color: var(--leader);
+    font-size: clamp(1.0625rem, .92rem + .48vw, 1.375rem);
+  }
+  .beats { margin-top: clamp(28px, 6vh, 56px); max-width: 34em; display: grid; gap: .5em; }
 
-			</div>
+  .site {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, .3fr);
+    align-items: end;
+    gap: clamp(24px, 4vh, 40px) clamp(16px, 3vw, 48px);
+    max-width: 1320px; margin: 0 auto;
+    padding: clamp(72px, 14vh, 160px) var(--gutter) 0;
+  }
+  .shot { grid-row: 1; grid-column: 1; position: relative; aspect-ratio: 16 / 10; overflow: hidden; }
+  .lens, .strip { position: relative; }
+  .strip .full { display: none; }
+  .strip .hero { width: 100%; height: auto; }
+  /* the 7px bezel sits outside the screen (content-box), so the screen keeps the capture's own 780:1688 ratio and shows it whole */
+  .phone {
+    grid-row: 1; grid-column: 2;
+    position: relative; overflow: hidden;
+    box-sizing: content-box; aspect-ratio: 780 / 1688;
+    border: 7px solid var(--matte);
+    border-radius: 13% / 6%;
+    box-shadow: 0 0 0 1px rgba(243, 234, 219, .28), 0 30px 80px rgba(0, 0, 0, .7);
+  }
+  .phone img { width: 100%; height: auto; }   /* its own ratio, which is the screen's */
+  .site .card { grid-row: 2; grid-column: 1 / -1; }
+  .site .sub { margin: 0 0 .2em; color: var(--leader); }
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+  .credits {
+    padding: clamp(96px, 18vh, 200px) var(--gutter) clamp(72px, 12vh, 140px);
+    text-align: center;
+  }
+  .credits .mark { width: clamp(60px, 6vw, 84px); height: auto; margin: 0 auto clamp(20px, 3vh, 32px); }
+  .credits .title { font-size: clamp(3.25rem, 8.5vw, 8.5rem); text-wrap: balance; }
+  .contact {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 4px clamp(24px, 4vw, 56px);
+    margin: clamp(24px, 4vh, 40px) 0 0; padding: 0; list-style: none;
+  }
+  .contact a {
+    display: inline-flex; align-items: center; min-height: 48px;
+    font-size: clamp(1.375rem, 1rem + 1.3vw, 2.25rem); line-height: 1.2;
+    text-decoration-thickness: 1px; text-underline-offset: 8px; text-decoration-color: var(--leader);
+  }
+  .contact a:hover { text-decoration-color: var(--tungsten); }
+  .about {
+    max-width: 38em; margin: clamp(56px, 10vh, 112px) auto 0;
+    text-align: left;
+  }
+  .about h3 {
+    margin-bottom: .6em;
+    font: 700 1.1875rem/1 var(--display); letter-spacing: .03em; color: var(--leader);
+  }
+  .about p + p { margin-top: .9em; }
+  .thanks { margin-top: clamp(56px, 10vh, 112px); font-style: italic; color: var(--leader); }
 
-	</body>
+  /* ---------- The reel (motion allowed) ---------- */
+  .motion {
+    /* the bottom bar matches the top one, and grows when needed to hold the tallest subtitle (--sub-h, measured in fit()) */
+    --bar: clamp(60px, 11vh, 112px); --bar-b: max(var(--bar), var(--sub-h, 0px));
+    --card: min(40rem, 46vw); --phone-r: clamp(24px, 7vw, 128px);
+    overflow-anchor: none; /* the scroll position is the playhead, so the browser must not nudge it */
+  }
+  .motion .topbar { position: fixed; left: 0; right: 0; top: 0; height: var(--bar); flex-wrap: nowrap; }
+  .motion .stage {
+    position: sticky; top: 0;
+    height: 100vh; height: 100dvh;
+    overflow: hidden;
+    background: var(--matte);
+    container-type: size;
+  }
+  .motion .scene {
+    position: absolute; inset: 0;
+    display: grid; grid-template-rows: var(--bar) minmax(0, 1fr) var(--bar-b); grid-template-columns: minmax(0, 1fr);
+    max-width: none; margin: 0; padding: 0; gap: 0;
+    opacity: 0; pointer-events: none;
+  }
+  .motion .scene.is-on { opacity: 1; pointer-events: auto; z-index: 1; }
+
+  /* the picture area between the bars, and the shutter that cuts between reels */
+  .motion .frame {
+    display: block; position: absolute; z-index: 6; left: 0; right: 0;
+    top: var(--bar); bottom: var(--bar-b); pointer-events: none;
+  }
+  .shutter {
+    position: absolute; left: 0; right: 0; height: calc(50% + 1px);
+    background: var(--matte);
+    transform: scaleY(0);
+    transition: transform 340ms cubic-bezier(.16, 1, .3, 1);
+  }
+  .shutter.top { top: 0; transform-origin: 50% 0; }
+  .shutter.bottom { bottom: 0; transform-origin: 50% 100%; }
+  .shutter.top::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(243, 234, 219, .5) 30%, rgba(243, 234, 219, .5) 70%, transparent);
+  }
+  .is-shut .shutter { transform: scaleY(1); transition: transform 260ms cubic-bezier(.7, 0, .84, 0); }
+
+  /* the site's screenshot, drifting down its own page */
+  .motion .site .shot, .motion .site .phone { grid-area: auto; align-self: auto; justify-self: auto; }
+  .motion .site .shot {
+    position: absolute; left: 0; right: 0; top: var(--bar); bottom: var(--bar-b);
+    aspect-ratio: auto; z-index: 0;
+  }
+  .motion .lens { position: absolute; inset: 0; transform-origin: 50% 40%; }
+  .motion .strip { position: absolute; left: 0; top: 0; width: 100%; will-change: transform; }
+  /* a capture shorter than the picture (a short page on a tall screen) fades into the black instead of ending on a hard edge */
+  .motion .site.short .strip { -webkit-mask-image: linear-gradient(#000 72%, transparent); mask-image: linear-gradient(#000 72%, transparent); }
+  .motion .strip .full { display: block; width: 100%; height: auto; }
+  .motion .strip .hero { position: absolute; left: 0; top: 0; }
+  .motion .site .shot::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background:
+      linear-gradient(90deg, rgba(0,0,0,.92) 0%, rgba(0,0,0,.87) 40%, rgba(0,0,0,.56) 60%, rgba(0,0,0,.3) 100%),
+      linear-gradient(0deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 45%);
+  }
+  .motion .is-on .lens { animation: settle 9s cubic-bezier(.2, .6, .2, 1) both; }
+
+  /* 86% of the picture's height (--ph, bezel included), centered, but never wider than the room the card leaves */
+  .motion .site .phone {
+    --ph: min((100cqh - var(--bar) - var(--bar-b)) * .86, (100cqw - var(--gutter) - var(--card) - var(--phone-r) - 38px) * 1688 / 780 + 14px);
+    position: absolute; z-index: 2; margin: 0;
+    right: var(--phone-r);
+    top: calc(var(--bar) + (100cqh - var(--bar) - var(--bar-b) - var(--ph)) / 2);
+    height: calc(var(--ph) - 14px);
+    width: auto;
+  }
+  .motion .is-on .phone { animation: slide-in 1000ms cubic-bezier(.16, 1, .3, 1) 140ms both; }
+
+  .motion .site .card {
+    grid-row: 2; grid-column: 1; z-index: 3;
+    align-self: end; justify-self: start;
+    width: var(--card);
+    margin: 0 0 clamp(20px, 5vh, 56px) var(--gutter);
+  }
+  .motion .is-on .card { animation: cut-in 10ms steps(1, end) 260ms both; }
+
+  .motion .sub, .motion .beats {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
+    height: var(--bar-b);
+    width: min(38em, calc(100% - 2 * (var(--gutter) + 9.5rem)));
+    margin: 0 auto;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; color: var(--tungsten);
+  }
+  /* the opening's counter label is longer, so its subtitles leave it more room */
+  .motion .beats { display: grid; place-items: center; max-width: none; gap: 0; width: min(38em, calc(100% - 2 * (var(--gutter) + 11.5rem))); }
+  .motion .beat { grid-area: 1 / 1; opacity: 0; }
+  .motion .beat.is-on { opacity: 1; }
+
+  .motion .open { min-height: 0; padding: 0; place-items: initial; }
+  .motion .open .card {
+    grid-row: 2; align-self: center; justify-self: center;
+    padding: 0 var(--gutter);
+    background: radial-gradient(closest-side, rgba(243, 234, 219, .07), rgba(243, 234, 219, 0));
+  }
+  .motion .open .title { font-size: clamp(3.25rem, min(9vw, 14vh), 9.5rem); }
+  .motion .cue {
+    display: block; margin-top: clamp(20px, 5vh, 48px);
+    font: 600 1rem/1 var(--display); letter-spacing: .04em; color: var(--leader);
+  }
+  .motion .cue::after {
+    content: ""; display: block; width: 1px; height: clamp(20px, 4vh, 36px);
+    margin: 12px auto 0; background: var(--leader);
+  }
+
+  .motion .counter {
+    display: flex; position: fixed; z-index: 8; left: 0; right: 0; bottom: 0;
+    height: var(--bar-b); padding-inline: var(--gutter);
+    align-items: center; justify-content: space-between;
+    pointer-events: none;
+    font: 600 1rem/1 var(--display); letter-spacing: .05em; color: var(--leader);
+    font-variant-numeric: tabular-nums;
+    transition: opacity .2s;
+  }
+  .count { display: inline-flex; align-items: center; gap: 10px; color: var(--tungsten); }
+  .count::before { content: ""; width: 9px; height: 9px; background: var(--grade); }
+  .motion.in-credits .counter { opacity: 0; }
+
+  .motion .credits { position: relative; z-index: 1; background: var(--matte); }
+
+  @keyframes settle { from { transform: scale(1.06); } to { transform: none; } }
+  @keyframes slide-in { from { transform: translateX(calc(100% + 14vw)); } to { transform: none; } }
+  @keyframes cut-in { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes settle-in { from { transform: scale(.94); } to { transform: none; } }
+
+  /* ---------- Phones: a vertical reel (short ones in landscape keep the wide reel), and a two-row bar ---------- */
+  @media (max-width: 720px) and (orientation: portrait), (max-width: 720px) and (min-height: 561px), (max-width: 639px) {
+    :root { --bar: 92px; }
+    .topbar {
+      display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: minmax(52px, auto) 28px;
+      align-items: center; align-content: start; column-gap: 12px; row-gap: 0;
+      padding-bottom: 8px;
+    }
+    .brand { font-size: 1.125rem; gap: 10px; white-space: normal; }
+    .brand svg { width: 30px; }
+    .reels { grid-row: 2; grid-column: 1 / -1; }
+    .reels ol { flex: 1; gap: 3px; }
+    .reels li { flex: 1; }
+    .reels ol a { width: auto; height: 28px; }
+    .reels li:nth-child(-n+3) .tip { left: 0; transform: none; }
+    .reels li:nth-child(n+4) .tip { left: auto; right: 0; transform: none; }
+    .to-contact { grid-row: 1; grid-column: 2; }
+
+    .site { grid-template-columns: minmax(0, 1fr); padding-top: 72px; }
+    .site .phone { grid-column: 1; grid-row: 1; justify-self: end; align-self: end; width: calc(34% - 14px); margin: 0 10px -14% 0; }
+    .site .card { padding-top: 7%; }
+
+    .motion { --bar: 92px; --bar-b: max(120px, var(--sub-h, 0px)); }
+    .motion .counter { display: none; }
+    .motion .sub, .motion .beats { width: calc(100% - 2 * var(--gutter)); font-size: .9375rem; }
+
+    /* the phone capture stands whole in its mockup, centered in the room the card leaves above it, on black. It is sized
+       for the browser's toolbar showing, so the toolbar never resizes it; where it would stand under 120px it steps aside
+       for that reel and the card centers in the picture (see placePhone()) */
+    .motion .site { grid-template-rows: var(--bar) minmax(0, 1fr) auto var(--bar-b); }
+    .motion .site .phone {
+      position: relative; grid-row: 2; grid-column: 1; justify-self: center; align-self: center;
+      top: auto; right: auto; width: auto; z-index: 0;
+      height: calc(100% - 50px); height: calc(100% - 50px - (100dvh - 100svh));   /* 18px clear above and below, plus the bezel */
+    }
+    .motion .is-on .phone { animation: settle-in 900ms cubic-bezier(.16, 1, .3, 1) 140ms both; }
+    .motion .site.no-phone .phone { display: none; }
+    .motion .site.no-phone .card { grid-row: 2 / 4; align-self: center; }
+    .motion .site .shot { display: none; }
+    .motion .site .card { grid-row: 3; width: auto; margin: 0 var(--gutter) 18px; padding: 0; }
+  }
+
+  /* Short landscape screens, phones included: thinner bars, a wider card on a scrim that follows it, tighter spacing,
+     and the opening label stacks so the subtitles keep their width */
+  @media (max-height: 560px) and (orientation: landscape) {
+    .motion {
+      --bar: 52px; --bar-b: max(76px, var(--sub-h, 0px));
+      --card: min(40rem, 100cqw - var(--gutter) - var(--phone-r) - ((100cqh - var(--bar) - var(--bar-b)) * .86 - 14px) * 780 / 1688 - 38px);
+    }
+    .motion .site .shot::after {
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.92) 0%, rgba(0,0,0,.87) calc(var(--gutter) + var(--card)), rgba(0,0,0,.56) calc(var(--gutter) + var(--card) + 20%), rgba(0,0,0,.3) 100%),
+        linear-gradient(0deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 45%);
+    }
+    .motion .site .card { margin-bottom: 12px; }
+    .motion .site .title { font-size: clamp(2.75rem, min(8vw, 15vh), 6rem); }
+    .motion .line { font-size: 1rem; max-width: 36em; margin: .6em 0; }
+    .motion .visit { margin-top: 0; }
+    .motion .sub, .motion .beats { font-size: 1rem; }
+    .motion .beats { width: min(38em, calc(100% - 2 * (var(--gutter) + 9.5rem))); }
+    .motion .count { white-space: pre-line; }
+    .motion .open .mark { width: 56px; margin-bottom: 10px; }
+    .motion .cue { margin-top: 14px; }
+    .motion .cue::after { height: 14px; margin-top: 8px; }
+  }
+
+  /* Very short landscape (a toolbar appeared after the reel started): the quote leaves the reel cards but stays for screen readers */
+  @media (max-height: 360px) and (orientation: landscape) {
+    .motion .site .line {
+      position: absolute; width: 1px; height: 1px; margin: 0;
+      overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+    }
+    .motion .open .mark { width: 44px; }
+    .motion .cue::after { display: none; }
+  }
+
+  /* on a very short screen the calm sequence's top bar scrolls away instead of covering it */
+  @media (max-height: 400px) {
+    .topbar { position: relative; }
+  }
+
+  /* contrast themes get the calm sequence (see REEL): the reel strip keeps system colors, and the title's backplate clears the year */
+  @media (forced-colors: active) {
+    .seg { forced-color-adjust: none; height: 7px; margin-top: -3.5px; border: 1px solid CanvasText; background: Canvas; }
+    .seg::after { background: Highlight; }
+    .title { line-height: 1.2; }
+  }
+
+  /* print the calm sequence (the script switches to it) in dark ink, without the bars */
+  @media print {
+    :root { --matte: #fff; --tungsten: #111; --leader: #555; }
+    html { color-scheme: light; }
+    .skip, .topbar, .counter { display: none; }
+    .year { color: var(--tungsten); }
+    .site { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#contact">Skip to contact</a>
+
+<header class="topbar">
+  <a class="brand" href="#top">
+    <svg viewBox="0 0 100 80" aria-hidden="true" focusable="false"><path fill="#948c80" d="M2 78 30 41l6 3 10-19 6-15 4-7 3 6 6 9 6 7 6 9 6 6 15 38Z"/><path fill="#f3eadb" d="m46 25 6-15 4-7 3 6 6 9 6 7-5 3-4-4-4 6-4-6-4 5-4-5Z"/></svg>
+    <span>Dimitri Cole Designs.</span>
+  </a>
+  <nav class="reels" aria-label="Reels">
+    <ol>
+      <li><a href="#ovenlight" data-i="1" style="--c:#f0a35e"><span class="seg"></span><span class="tip"><span class="sr">Reel 1, </span>Ovenlight</span></a></li>
+      <li><a href="#glitch" data-i="2" style="--c:#ff4d4d"><span class="seg"></span><span class="tip"><span class="sr">Reel 2, </span>Glitch</span></a></li>
+      <li><a href="#snowyghost" data-i="3" style="--c:#c9dcf0"><span class="seg"></span><span class="tip"><span class="sr">Reel 3, </span>Snowy Ghost</span></a></li>
+      <li><a href="#patrick" data-i="4" style="--c:#ee8fdc"><span class="seg"></span><span class="tip"><span class="sr">Reel 4, </span>Patrick</span></a></li>
+      <li><a href="#dimitricole" data-i="5" style="--c:#ffb38a"><span class="seg"></span><span class="tip"><span class="sr">Reel 5, </span>Dimitri Cole</span></a></li>
+      <li><a href="#rhinelander" data-i="6" style="--c:#ffd54a"><span class="seg"></span><span class="tip"><span class="sr">Reel 6, </span>Rhinelander</span></a></li>
+    </ol>
+  </nav>
+  <a class="to-contact" href="#contact">Contact</a>
+</header>
+
+<div class="counter" aria-hidden="true"><span class="count">Six reels,&#10;newest first</span><span class="tc">00:00:00:00</span></div>
+
+<main class="track">
+  <div class="stage">
+
+    <section class="scene open" id="top" data-len="1.5" aria-labelledby="t-top">
+      <div class="card">
+        <svg class="mark" viewBox="0 0 100 80" aria-hidden="true" focusable="false"><path fill="#948c80" d="M2 78 30 41l6 3 10-19 6-15 4-7 3 6 6 9 6 7 6 9 6 6 15 38Z"/><path fill="#f3eadb" d="m46 25 6-15 4-7 3 6 6 9 6 7-5 3-4-4-4 6-4-6-4 5-4-5Z"/></svg>
+        <h1 class="title" id="t-top" tabindex="-1">Dimitri Cole Designs.</h1>
+        <p class="credit">Freelance web design by Dimitri Cole Restaino in New York</p>
+        <p class="cue" aria-hidden="true">Scroll to play the reel</p>
+        <div class="beats">
+          <p class="beat">Hi, I’m Dimitri! By day I lead customer solutions at a fintech company.</p>
+          <p class="beat">The rest of the time I build smaller passion projects as life allows.</p>
+          <p class="beat">Here are six of my most recent sites, newest first. Please reach out if you would like to work together!</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene site" id="ovenlight" data-len="1.5" data-fullh="4325" style="--grade:#f0a35e" aria-labelledby="t-ovenlight">
+      <div class="card">
+        <h2 class="title" id="t-ovenlight" tabindex="-1">Ovenlight</h2>
+        <p class="year">2026</p>
+        <p class="line">“You or your coding agent built a web app. It runs on your own computer, and Ovenlight opens it on your iPhone behind Face ID.”</p>
+        <p class="sub">The website for Ovenlight, my iPhone app. Its serif wordmark sits in a warm, glowing light.</p>
+        <a class="visit" href="https://ovenlight.app" target="_blank" rel="noopener">Visit ovenlight.app<span class="sr"> (opens in a new tab)</span><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5 3h8v8M13 3 3 13" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+      </div>
+      <div class="shot"><div class="lens"><div class="strip">
+        <img class="full" src="images/reel/ovenlight-full.jpg" width="960" height="4325" alt="" loading="lazy" decoding="async">
+        <img class="hero" src="images/reel/ovenlight-hero.jpg" width="1600" height="1000" alt="The first screen of ovenlight.app on a desktop" decoding="async">
+      </div></div></div>
+      <figure class="phone"><img src="images/reel/ovenlight-phone.jpg" width="780" height="1688" alt="ovenlight.app on a phone" decoding="async"></figure>
+    </section>
+
+    <section class="scene site" id="glitch" data-len="1.5" data-fullh="2875" style="--grade:#ff4d4d" aria-labelledby="t-glitch">
+      <div class="card">
+        <h2 class="title" id="t-glitch" tabindex="-1">Glitch</h2>
+        <p class="year">2026</p>
+        <p class="line">“Not everyone in the room is human.”</p>
+        <p class="sub">The website for Glitch, my party game of robots, humans and hidden roles. You can play a round right in the browser.</p>
+        <a class="visit" href="https://playglitchgame.com" target="_blank" rel="noopener">Visit playglitchgame.com<span class="sr"> (opens in a new tab)</span><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5 3h8v8M13 3 3 13" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+      </div>
+      <div class="shot"><div class="lens"><div class="strip">
+        <img class="full" src="images/reel/glitch-full.jpg" width="960" height="2875" alt="" loading="lazy" decoding="async">
+        <img class="hero" src="images/reel/glitch-hero.jpg" width="1600" height="1000" alt="The first screen of playglitchgame.com on a desktop" decoding="async">
+      </div></div></div>
+      <figure class="phone"><img src="images/reel/glitch-phone.jpg" width="780" height="1688" alt="playglitchgame.com on a phone" decoding="async"></figure>
+    </section>
+
+    <section class="scene site" id="snowyghost" data-len="1.5" data-fullh="3532" style="--grade:#c9dcf0" aria-labelledby="t-snowyghost">
+      <div class="card">
+        <h2 class="title" id="t-snowyghost" tabindex="-1">Snowy Ghost</h2>
+        <p class="year">2025, redesigned 2026</p>
+        <p class="line">“Snowy Ghost is an innovation company.”</p>
+        <p class="sub">The home of Snowy Ghost, my app company in New York. Press the ghost and he shakes off the snow.</p>
+        <a class="visit" href="https://snowyghost.com" target="_blank" rel="noopener">Visit snowyghost.com<span class="sr"> (opens in a new tab)</span><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5 3h8v8M13 3 3 13" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+      </div>
+      <div class="shot"><div class="lens"><div class="strip">
+        <img class="full" src="images/reel/snowyghost-full.jpg" width="960" height="3532" alt="" loading="lazy" decoding="async">
+        <img class="hero" src="images/reel/snowyghost-hero.jpg" width="1600" height="1000" alt="The first screen of snowyghost.com on a desktop" decoding="async">
+      </div></div></div>
+      <figure class="phone"><img src="images/reel/snowyghost-phone.jpg" width="780" height="1688" alt="snowyghost.com on a phone" decoding="async"></figure>
+    </section>
+
+    <section class="scene site" id="patrick" data-len="1.5" data-fullh="600" style="--grade:#ee8fdc" aria-labelledby="t-patrick">
+      <div class="card">
+        <h2 class="title" id="t-patrick" tabindex="-1">Patrick</h2>
+        <p class="year">2021</p>
+        <p class="line">“Hi, I’m Patrick the Artist. I make character art for people to enjoy.”</p>
+        <p class="sub">A portfolio for Patrick, the best artist that I know.</p>
+        <a class="visit" href="https://patricktheartist.com" target="_blank" rel="noopener">Visit patricktheartist.com<span class="sr"> (opens in a new tab)</span><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5 3h8v8M13 3 3 13" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+      </div>
+      <div class="shot"><div class="lens"><div class="strip">
+        <img class="full" src="images/reel/patrick-full.jpg" width="960" height="600" alt="" loading="lazy" decoding="async">
+        <img class="hero" src="images/reel/patrick-hero.jpg" width="1600" height="1000" alt="The first screen of patricktheartist.com on a desktop" decoding="async">
+      </div></div></div>
+      <figure class="phone"><img src="images/reel/patrick-phone.jpg" width="780" height="1688" alt="patricktheartist.com on a phone" decoding="async"></figure>
+    </section>
+    <section class="scene site" id="dimitricole" data-len="1.5" data-fullh="7116" style="--grade:#ffb38a" aria-labelledby="t-dimitricole">
+      <div class="card">
+        <h2 class="title" id="t-dimitricole" tabindex="-1">Dimitri Cole</h2>
+        <p class="year">2019, redesigned 2026</p>
+        <p class="line">“Solutions architecture for AI, cloud, and agentic finance.”</p>
+        <p class="sub">My own site, where my career reads as a descent from a night summit to a daylight trailhead.</p>
+        <a class="visit" href="https://dimitricole.com" target="_blank" rel="noopener">Visit dimitricole.com<span class="sr"> (opens in a new tab)</span><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5 3h8v8M13 3 3 13" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+      </div>
+      <div class="shot"><div class="lens"><div class="strip">
+        <img class="full" src="images/reel/dimitricole-full.jpg" width="960" height="7116" alt="" loading="lazy" decoding="async">
+        <img class="hero" src="images/reel/dimitricole-hero.jpg" width="1600" height="1000" alt="The first screen of dimitricole.com on a desktop" decoding="async">
+      </div></div></div>
+      <figure class="phone"><img src="images/reel/dimitricole-phone.jpg" width="780" height="1688" alt="dimitricole.com on a phone" decoding="async"></figure>
+    </section>
+
+    <section class="scene site" id="rhinelander" data-len="1.5" data-fullh="600" style="--grade:#ffd54a" aria-labelledby="t-rhinelander">
+      <div class="card">
+        <h2 class="title" id="t-rhinelander" tabindex="-1">Rhinelander Auto Body</h2>
+        <p class="year">2019</p>
+        <p class="line">“Quality auto repair and painting, serving the Bronx, Lower Westchester, and Manhattan since 1938.”</p>
+        <p class="sub">The website for Rhinelander Auto Body in the Bronx. Its yellow wordmark sits over a dark photograph of the garage.</p>
+        <a class="visit" href="https://rhinelander.nyc" target="_blank" rel="noopener">Visit rhinelander.nyc<span class="sr"> (opens in a new tab)</span><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5 3h8v8M13 3 3 13" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+      </div>
+      <div class="shot"><div class="lens"><div class="strip">
+        <img class="full" src="images/reel/rhinelander-full.jpg" width="960" height="600" alt="" loading="lazy" decoding="async">
+        <img class="hero" src="images/reel/rhinelander-hero.jpg" width="1600" height="1000" alt="The first screen of rhinelander.nyc on a desktop" decoding="async">
+      </div></div></div>
+      <figure class="phone"><img src="images/reel/rhinelander-phone.jpg" width="780" height="1688" alt="rhinelander.nyc on a phone" decoding="async"></figure>
+    </section>
+
+
+    <div class="frame" aria-hidden="true"><div class="shutter top"></div><div class="shutter bottom"></div></div>
+  </div>
+  <div class="spacer" aria-hidden="true"></div>
+</main>
+
+<footer class="credits" id="contact" aria-labelledby="t-contact">
+  <svg class="mark" viewBox="0 0 100 80" aria-hidden="true" focusable="false"><path fill="#948c80" d="M2 78 30 41l6 3 10-19 6-15 4-7 3 6 6 9 6 7 6 9 6 6 15 38Z"/><path fill="#f3eadb" d="m46 25 6-15 4-7 3 6 6 9 6 7-5 3-4-4-4 6-4-6-4 5-4-5Z"/></svg>
+  <h2 class="title" id="t-contact" tabindex="-1">Let’s make reel seven.</h2>
+  <ul class="contact">
+    <li><a href="mailto:dimitri.code@gmail.com">dimitri.code@gmail.com</a></li>
+    <li><a href="https://www.linkedin.com/in/dimitricole/" target="_blank" rel="noopener">LinkedIn<span class="sr"> (opens in a new tab)</span></a></li>
+  </ul>
+  <div class="about">
+    <h3>About</h3>
+    <p>I currently work as a Customer Solutions Director at Ripple in New York, where I have the privilege of helping banks and builders bring tokenization and next-generation payments onto the XRP Ledger.</p>
+    <p>My favorite things to do are snowboard and travel. I hope to someday retire in the mountains, remotely doing tech strategy consulting, unless there is a powder day...</p>
+  </div>
+  <p class="thanks">Thanks for watching.</p>
+</footer>
+
+<script>
+(() => {
+  const root = document.documentElement;
+  const mqPortrait = matchMedia('(orientation: portrait)');
+  const mqNarrow = matchMedia('(max-width: 720px) and (orientation: portrait), (max-width: 720px) and (min-height: 561px), (max-width: 639px)');
+  const stage = document.querySelector('.stage');
+  const frame = document.querySelector('.frame');
+  const spacer = document.querySelector('.spacer');
+  const contact = document.getElementById('contact');
+  const topbar = document.querySelector('.topbar');
+  const openCard = document.querySelector('.open .card'), beatsBox = document.querySelector('.beats');
+  const scenes = [...stage.querySelectorAll('.scene')];
+  const sites = [...document.querySelectorAll('.site')];
+  const reelLinks = [...document.querySelectorAll('.reels a[data-i]')];
+  const countEl = document.querySelector('.count');
+  const tcEl = document.querySelector('.tc');
+  const beats = [...document.querySelectorAll('.beat')];
+  const subs = sites.map(s => s.querySelector('.sub'));
+  const BLANK = scenes.length;             // the black frame after the last reel, before the credits roll
+  const CLOSE = 260, HOLD = 90, OPEN = 340; // one cut takes ~0.7s, so there are never more than 2 a second
+  const FPS = 24, PX_PER_FRAME = 4;
+
+  let motion = false, vh = 0, W = 0, H = 0, starts = [], total = 0, lastW = 0, lastH = 0;
+  let shown = -1, want = 0, busy = false, raf = 0, atI = 0, atP = 0, atY = 0, calmI = 0, decW = 0, decH = 0, decP = false;
+  const drift = scenes.map(() => ({ cur: 0, max: 0 }));
+
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const len = i => parseFloat(scenes[i].dataset.len) * vh;
+  const driftEl = i => mqNarrow.matches ? null : scenes[i].querySelector('.strip');   // phone captures are one screen: no drift
+
+  function measure() {
+    vh = window.innerHeight; lastW = window.innerWidth; lastH = vh;
+    let acc = 0;
+    starts = scenes.map((s, i) => { const at = acc; acc += len(i); return at; });
+    total = acc;
+    spacer.style.height = total + 'px';
+    measureFrame();
+    sites.forEach(placePhone);
+  }
+
+  /* On phones a reel's mockup shows only if it stands at least 120px tall. This is decided as the reel cuts in and on a
+     real relayout, never on a toolbar-sized resize mid-reel, so the phone never pops in or out while you watch. */
+  const PHONE_MIN = 120;
+  function placePhone(site) {
+    site.classList.remove('no-phone');
+    site.classList.toggle('no-phone', mqNarrow.matches && site.querySelector('.phone').offsetHeight < PHONE_MIN);
+  }
+
+  /* the picture between the bars and how far each desktop screenshot drifts in it; the scroll track stays as it is */
+  function measureFrame() {
+    W = frame.clientWidth; H = frame.clientHeight;
+    scenes.forEach((s, i) => {
+      if (!s.classList.contains('site')) return;
+      /* the screenshot may drift as far as it still covers the picture, and plays out over at most 1.6 pictures; only the
+         coverage bound is enforced at once (so no black shows below it), and render() eases toward the rest */
+      const full = W * parseFloat(s.dataset.fullh) / 960, cover = mqNarrow.matches ? 0 : Math.max(0, full - H);
+      s.classList.toggle('short', !mqNarrow.matches && full < H);
+      drift[i].max = Math.min(cover, 1.6 * H);
+      drift[i].cur = clamp(drift[i].cur, -cover, 0);
+      s.querySelector('.strip').style.transform = '';
+    });
+  }
+
+  function sceneAt(y) {
+    if (y > total - 0.12 * vh) return BLANK;
+    let i = 0;
+    for (let k = 0; k < scenes.length; k++) if (y >= starts[k] - 1) i = k;
+    return i;
+  }
+  const progress = (i, y) => (i >= 0 && i < BLANK) ? clamp((y - starts[i]) / len(i), 0, 1) : 1;
+
+  function show(i) {
+    if (scenes[i]?.classList.contains('site')) placePhone(scenes[i]);
+    scenes.forEach((s, k) => s.classList.toggle('is-on', k === i));
+    shown = i;
+    if (i < BLANK && drift[i]) drift[i].cur = -progress(i, scrollY) * drift[i].max;
+    render(true);
+  }
+
+  function cut() {
+    busy = true;
+    root.classList.add('is-shut');
+    setTimeout(() => {
+      show(want);
+      setTimeout(() => {
+        if (shown !== BLANK) root.classList.remove('is-shut');
+        setTimeout(() => { busy = false; if (want !== shown) cut(); }, OPEN);
+      }, HOLD);
+    }, CLOSE);
+  }
+
+  /* the reel strip, counter and grade follow the picture, so they change on the cut */
+  function chrome(y) {
+    const at = shown < 0 ? want : shown, p = progress(at, y);
+    reelLinks.forEach((a, k) => {
+      const n = k + 1;
+      a.style.setProperty('--fill', n < at ? 1 : n === at ? p.toFixed(3) : 0);
+      if (n === at) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+    });
+    const label = at === 0 ? 'Six reels,\nnewest first' : at === BLANK ? 'Credits' : `Reel ${at} of 6`;
+    if (countEl.textContent !== label) countEl.textContent = label;
+    const g = at > 0 && at < BLANK ? scenes[at].style.getPropertyValue('--grade') : '';
+    root.style.setProperty('--grade', g || 'var(--tungsten)');
+    root.classList.toggle('in-credits', y > total + 4);
+    const f = Math.floor(y / PX_PER_FRAME), pad = n => String(n).padStart(2, '0');
+    tcEl.textContent = `${pad(Math.floor(f / (FPS * 3600)))}:${pad(Math.floor(f / (FPS * 60)) % 60)}:${pad(Math.floor(f / FPS) % 60)}:${pad(f % FPS)}`;
+  }
+
+  function tick() { raf = 0; render(false); }
+  function render(snap) {
+    if (!motion) return;
+    const y = scrollY;
+    const i = sceneAt(y);
+    atI = i; atP = progress(i, y); atY = y;
+    if (i !== want) { want = i; if (!busy && want !== shown) cut(); }
+    chrome(y);
+    let moving = false;
+    if (shown === 0) {
+      const p = progress(0, y), b = p < .34 ? 0 : p < .67 ? 1 : 2;
+      beats.forEach((el, k) => el.classList.toggle('is-on', k === b));
+    } else if (shown > 0 && shown < BLANK) {
+      /* the reel on screen always shows its own drift, even mid-cut; it eases toward the scroll only while it is the one wanted */
+      const d = drift[shown];
+      if (want === shown) {
+        const target = -progress(shown, y) * d.max;
+        d.cur = snap ? target : d.cur + (target - d.cur) * 0.12;
+        if (Math.abs(target - d.cur) < 0.4) d.cur = target; else moving = true;
+      }
+      const el = driftEl(shown);
+      if (el) el.style.transform = `translate3d(0, ${d.cur.toFixed(1)}px, 0)`;
+    }
+    if (moving && !raf) raf = requestAnimationFrame(tick);
+  }
+  const onScroll = () => { if (!raf) raf = requestAnimationFrame(tick); };
+
+  function jump(i) {
+    window.scrollTo(0, Math.ceil(starts[i]) + 1);
+    render(false);
+  }
+
+  /* the reel starts where the link points, or where you last were in the calm sequence when it comes back on */
+  function enable() {
+    const from = root.classList.contains('motion') ? -1 : calmI;
+    motion = true;
+    root.classList.add('motion', 'is-shut');
+    measure();
+    const to = from >= 0 ? from : location.hash === '#contact' ? BLANK : scenes.findIndex(s => '#' + s.id === location.hash);
+    if (to === BLANK) contact.scrollIntoView();
+    else if (to >= 0) window.scrollTo(0, to ? Math.ceil(starts[to]) + 1 : 0);
+    want = sceneAt(scrollY);
+    show(want);
+    setTimeout(() => { if (shown !== BLANK && !busy) root.classList.remove('is-shut'); }, 420);
+  }
+
+  function disable() {
+    const from = motion ? atI : -1;
+    motion = false;
+    root.classList.remove('motion', 'is-shut', 'in-credits');
+    spacer.style.height = '';
+    scenes.forEach(s => s.classList.remove('is-on'));
+    document.querySelectorAll('.strip').forEach(el => { el.style.transform = ''; });
+    shown = -1;
+    if (from === 0) window.scrollTo(0, 0);
+    else if (from > 0) {
+      const target = from < BLANK ? scenes[from] : contact;
+      target.scrollIntoView();
+      if (target.contains(document.activeElement)) document.activeElement.scrollIntoView({ block: 'center' });
+    }
+    calmI = from >= 0 ? from : calmAt();
+    calm();
+  }
+
+  /* reel or calm: decided at load in the head, then again on a new width, orientation or motion preference,
+     or a height change of 150px or more, so a browser toolbar showing or hiding never switches it mid-scroll */
+  function decide(reel) {
+    decW = innerWidth; decH = innerHeight; decP = mqPortrait.matches;
+    if (reel !== motion) (reel ? enable : disable)();
+  }
+
+  /* where you are in the calm sequence: 0 at the opening, a reel's number, or BLANK in the credits */
+  function calmAt() {
+    if (contact.getBoundingClientRect().top < innerHeight * .5) return BLANK;
+    let at = 0;
+    sites.forEach((s, k) => { if (s.getBoundingClientRect().top < innerHeight * .5) at = k + 1; });
+    return at;
+  }
+
+  /* calm sequence: the reel strip in the top bar still shows where you are, without any motion. A scroll that comes
+     with a new page height is a layout change (zoom, print, a theme) rather than you, so it keeps the place you were at */
+  let calmH = 0;
+  function calm() {
+    if (motion) return;
+    const at = calmAt(), h = root.scrollHeight;
+    if (h === calmH) calmI = at;
+    calmH = h;
+    reelLinks.forEach((a, k) => {
+      a.style.setProperty('--fill', k + 1 <= at ? 1 : 0);
+      if (k + 1 === at) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+    });
+  }
+
+  window.addEventListener('scroll', () => { if (motion) onScroll(); else calm(); }, { passive: true });
+  /* a new layout keeps your place, from the last frame drawn since the browser may already have moved scrollY:
+     in a reel by its progress, and past the last reel by how far the credits have rolled */
+  function relayout() {
+    const i = atI, p = atP, past = atY - total, oldVh = vh;
+    measure();
+    window.scrollTo(0, i < BLANK ? starts[i] + p * len(i) : total + Math.min(past, oldVh) * vh / oldVh + Math.max(0, past - oldVh));
+    show(sceneAt(scrollY)); want = shown;
+    if (!busy) root.classList.toggle('is-shut', shown === BLANK);
+  }
+  window.addEventListener('resize', () => {
+    if (innerWidth !== decW || mqPortrait.matches !== decP || Math.abs(innerHeight - decH) >= 150) decide(matchMedia(REEL).matches);
+    if (motion && (innerWidth !== lastW || Math.abs(innerHeight - lastH) >= 150)) relayout();
+  });
+  mqNarrow.addEventListener('change', () => { if (motion) relayout(); });
+
+  /* The reel runs only while everything fits: the top bar whole, each card inside its picture, each subtitle inside the
+     bottom bar and clear of the counter. Larger or more widely spaced text that does not fit settles the page into the calm sequence until decide()
+     runs again, so it never flaps at one size. */
+  function fit() {
+    if (!motion) return;
+    /* first give the bottom bar the height of the tallest subtitle as it wraps now: its lines times its own line height */
+    const rg = document.createRange();
+    const lines = el => (rg.selectNodeContents(el), new Set([...rg.getClientRects()].filter(r => r.width).map(r => Math.round(r.top))).size);
+    const room = Math.floor(Math.max(...[...subs, ...beats].map(el => lines(el) * parseFloat(getComputedStyle(el).lineHeight)))) + 'px';
+    if (root.style.getPropertyValue('--sub-h') !== room) {
+      requestAnimationFrame(() => { if (motion) { root.style.setProperty('--sub-h', room); measureFrame(); render(true); fit(); } });
+      return;
+    }
+    /* the picture changed size without a full relayout (a toolbar, or a window edge dragged a little): each screenshot
+       gets its new drift range, and eases to it */
+    if (frame.clientWidth !== W || frame.clientHeight !== H) {
+      measureFrame(); render(false);
+      /* a window dragged shorter can shrink the shown phone under the floor; then it steps aside (it never pops in mid-reel) */
+      const on = scenes[shown];
+      if (on?.classList.contains('site') && !on.classList.contains('no-phone') && on.querySelector('.phone').offsetHeight < PHONE_MIN) placePhone(on);
+    }
+    const box = el => el.getBoundingClientRect(), f = box(frame), s = box(stage), bar = box(topbar);
+    const label = countEl.offsetParent && box(countEl), tc = label && box(tcEl), at = shown < 0 ? want : shown;
+    const inBar = el => { const r = box(el); return r.top >= bar.top - 1 && r.bottom <= bar.bottom + 1 && r.left >= -1 && r.right <= root.clientWidth + 1; };
+    const inFrame = (el, right) => {
+      const r = box(el);
+      return r.top >= f.top - 1 && r.bottom <= f.bottom + 1 && [...el.children].every(c => box(c).right - s.left <= right + 1 || c.matches('.sub, .beats'));
+    };
+    const inBottom = (el, labelled) => {
+      const r = box(el);
+      return r.top >= f.bottom - 1 && r.bottom <= s.bottom + 1 && el.scrollHeight <= el.clientHeight + 1 &&
+        !(labelled && label && (label.right > r.left || tc.left < r.right));
+    };
+    let fits = [...topbar.children].every(inBar) && inFrame(openCard, stage.clientWidth) && beats.every(b => inBottom(b)) && inBottom(beatsBox, at === 0);
+    sites.forEach((site, k) => {
+      const card = site.querySelector('.card'), phone = site.querySelector('.phone');
+      fits = fits && inFrame(card, mqNarrow.matches ? stage.clientWidth : phone.offsetLeft) && inBottom(subs[k], at === k + 1);
+    });
+    if (!fits && document.fonts.status === 'loaded') requestAnimationFrame(() => motion && disable());
+  }
+  const watch = new ResizeObserver(fit);
+  [stage, countEl, ...sites.map(s => s.querySelector('.card'))].forEach(el => watch.observe(el));
+  document.fonts.ready.then(() => { if (motion) sites.forEach(placePhone); fit(); });
+
+  /* a change of motion preference, contrast theme or print media decides again; printing uses the calm sequence and
+     comes back to the place you printed from, whatever the print layout did to the scroll position meanwhile */
+  let printing = false, printFrom = 0;
+  ['(prefers-reduced-motion: no-preference)', '(forced-colors: active)', 'print']
+    .forEach(q => matchMedia(q).addEventListener('change', () => { if (!printing) decide(matchMedia(REEL).matches); }));
+  window.addEventListener('beforeprint', () => { printing = true; printFrom = motion ? atI : calmI; decide(false); });
+  window.addEventListener('afterprint', () => { printing = false; calmI = printFrom; decide(matchMedia(REEL).matches); });
+
+  /* in-page links to a reel jump straight to it with a single cut */
+  document.addEventListener('click', e => {
+    if (!motion) return;
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const i = scenes.findIndex(s => '#' + s.id === a.getAttribute('href'));
+    if (i < 0) return;
+    e.preventDefault();
+    jump(i);
+    history.replaceState(null, '', a.getAttribute('href'));
+    scenes[i].querySelector('[tabindex="-1"]').focus({ preventScroll: true });
+  });
+
+  /* keyboard focus on a link in another reel brings that reel on screen */
+  document.addEventListener('focusin', e => {
+    if (!motion) return;
+    const s = e.target.closest('.scene');
+    if (!s) return;
+    const i = scenes.indexOf(s);
+    if (i !== sceneAt(scrollY)) jump(i);
+  });
+
+  /* a link straight to a reel (#glitch) lands on that reel, after the browser's own jump to the fragment */
+  function followHash() {
+    if (!motion) return;
+    const i = scenes.findIndex(s => '#' + s.id === location.hash);
+    if (i > 0) jump(i);
+  }
+  window.addEventListener('load', () => requestAnimationFrame(followHash));
+  window.addEventListener('hashchange', followHash);
+
+  decide(root.classList.contains('motion'));
+  calm();
+})();
+</script>
+</body>
 </html>
