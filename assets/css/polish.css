@@ -15,6 +15,22 @@
 .tiles article .image img {
 	object-fit: cover;
 }
+/* A tile is as tall as its screenshot, or as its text where the text needs more,
+   so nothing clips. Only then does the screenshot crop, keeping its wordmark. */
+.tiles article { display: grid; }
+.tiles article > .image, .tiles article > a { grid-area: 1 / 1; }
+.tiles article > a { position: relative; }
+.tiles article > .image img { height: 100%; }
+.tiles article > .image img.mark-left { object-position: left center; }
+/* Below 1040px the text can need more room than the screenshot. Where a pointer can hover, the
+   description keeps its room at rest and fades in, so a tile never grows under the pointer */
+@media screen and (max-width: 1039px) and (hover: hover) {
+	.tiles article > a .content { max-height: none; }
+}
+/* The template's light hover scrim suited dark screenshots; this keeps the white text readable over light ones */
+body:not(.is-touch) .tiles article:hover > .image:before {
+	opacity: 0.7;
+}
 
 /* --- Accessibility & platform feel ------------------------------------------- */
 a:focus-visible, button:focus-visible {
