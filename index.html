@@ -5,926 +5,720 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dimitri Cole Designs.</title>
 <meta name="description" content="Dimitri Cole Designs, freelance web design. Clean, fast websites for small businesses and passion projects.">
-<meta name="theme-color" content="#000000">
 <link rel="canonical" href="https://dimitricoledesigns.com/">
-<link rel="icon" href="images/mountain.png">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#ECEAE4">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Dimitri Cole Designs.">
-<meta property="og:description" content="Freelance web design by Dimitri Cole Restaino in New York. Six sites, cut like a film.">
 <meta property="og:url" content="https://dimitricoledesigns.com/">
-<meta property="og:image" content="https://dimitricoledesigns.com/images/og-showreel.jpg">
+<meta property="og:title" content="Dimitri Cole Designs.">
+<meta property="og:description" content="Freelance web design by Dimitri Cole Restaino, New York. Six sites, hung like a one-room show.">
+<meta property="og:image" content="https://dimitricoledesigns.com/images/og-exhibition.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="The words Dimitri Cole Designs in tall white letters on black, under a small snow-capped mountain.">
+<meta property="og:image:alt" content="The words Dimitri Cole Designs in a high-contrast serif on a warm grey wall, beside a framed browser window showing the Glitch website.">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 52'%3E%3Cpath fill='%231C2030' d='M1 50 22 22l3 2L35 4l28 46z'/%3E%3Cpath fill='%23fff' d='M35 4l9.13 15L41 17.6l-2.8 3-3-3.2L32 20l-3.5-3z'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="images/touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,300..900&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&display=swap" rel="stylesheet">
-<script>
-  /* The reel plays only on a screen with room for it (340x540 in portrait, 640x361 in landscape), when motion is welcome
-     and no contrast theme is on. Otherwise (a small or zoomed-in screen, reduced motion, a contrast theme, print, or no
-     JavaScript) the page is a calm vertical sequence. The page decides here at load, and later only when it must
-     (see decide() and fit()), so a toolbar showing or hiding never switches it. */
-  const REEL = ['(orientation: portrait) and (min-width: 340px) and (min-height: 540px)', '(orientation: landscape) and (min-width: 640px) and (min-height: 361px)']
-    .map(room => 'screen and (prefers-reduced-motion: no-preference) and (forced-colors: none) and ' + room).join(', ');
-  if (window.matchMedia && matchMedia(REEL).matches) document.documentElement.classList.add('motion', 'is-shut');
-</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&family=Host+Grotesk:wght@400..600&display=swap">
+<script>document.documentElement.classList.add('js');</script>
 <style>
-  :root {
-    --matte: #000000;      /* letterbox bars and the dark between reels */
-    --tungsten: #f3eadb;   /* projector-bulb white for type */
-    --leader: #a89f92;     /* film-leader grey for quiet text */
-    --dim: #6f685f;        /* unplayed reel segments */
-    --grade: var(--tungsten);
-    --bar: 72px;
-    --bar-b: 72px;
-    --gutter: clamp(16px, 4.4vw, 72px);
-    --display: "Big Shoulders", "Big Shoulders Display", "Arial Narrow", sans-serif;
-    --text: "Newsreader", "Iowan Old Style", Georgia, serif;
-  }
+:root {
+  --wall: #ECEAE4;
+  --lit: 255 254 250;
+  --ink: #1C2030;
+  --ink-2: #4E5266;
+  --blue: #284A86;
+  --wood: #2A2622;
+  --mat: #FBFAF7;
+  --card: #FAF9F5;
+  --chrome: #EEEDEA;
+  --serif: "Bodoni Moda", "Bodoni 72", Didot, Georgia, serif;
+  --sans: "Host Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --gutter: 40px;
+  --side: 300px;
+  --gap: 44px;
+  --fw: clamp(600px, 52.8vw, 920px);
+  --fw-small: clamp(460px, 39vw, 680px);
+  --mould: 10px;
+  --mat-w: 30px;
+  --bar-h: 32px;
+  --chrome-x: calc(2 * var(--mould) + 2 * var(--mat-w));
+  --chrome-y: calc(var(--chrome-x) + var(--bar-h));
+  --hang-gap: clamp(110px, 18vh, 190px);
+  --cap-min: 360px;
+  --vu: 1vh;
+  color-scheme: light;
+}
+@supports (height: 1svh) { :root { --vu: 1svh; } }
 
-  *, *::before, *::after { box-sizing: border-box; }
-  html { color-scheme: dark; background: var(--matte); -webkit-text-size-adjust: 100%; }
-  body {
-    margin: 0;
-    background: var(--matte);
-    color: var(--tungsten);
-    font-family: var(--text);
-    font-size: clamp(1rem, .95rem + .2vw, 1.125rem);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
-  /* in the calm sequence a long word or address wraps instead of running off a narrow or text-spaced screen */
-  html:not(.motion) { overflow-wrap: anywhere; }
-  img { display: block; max-width: 100%; }
-  a { color: inherit; }
-  h1, h2, h3, p, figure { margin: 0; }
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; background: var(--wall); }
+/* smooth scrolling starts once the page has loaded, so arriving at a #section jumps straight there */
+@media (prefers-reduced-motion: no-preference) { html.loaded { scroll-behavior: smooth; } }
+body {
+  margin: 0;
+  color: var(--ink);
+  font: 400 16px/1.55 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  /* the wall: warm grey with a faint plaster grain */
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .4 0 0 0 0 .36 0 0 0 0 .3 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E"),
+    var(--wall);
+}
 
-  :focus-visible {
-    outline: 3px solid var(--tungsten);
-    outline-offset: 3px;
-    box-shadow: 0 0 0 7px var(--matte);
-    border-radius: 2px;
-  }
-  [tabindex="-1"]:focus { outline: none; box-shadow: none; }
+a { color: var(--blue); text-decoration-thickness: 1px; text-underline-offset: .22em; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; border-radius: 2px; }
+.vh {
+  position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.skip {
+  position: absolute; left: 16px; top: -80px; z-index: 10;
+  background: var(--ink); color: var(--mat); padding: 10px 14px; border-radius: 3px;
+  font-weight: 500; text-decoration: none;
+}
+.skip:focus { top: 12px; }
+.skip:focus-visible { outline-color: var(--ink); }
 
-  .sr {
-    position: absolute; width: 1px; height: 1px; overflow: hidden;
-    clip-path: inset(50%); white-space: nowrap;
-  }
-  .skip {
-    position: fixed; z-index: 60; left: 16px; top: -120px;
-    padding: 12px 18px; background: var(--tungsten); color: var(--matte);
-    font: 700 1.0625rem/1 var(--display); text-decoration: none;
-  }
-  .skip:focus { top: 12px; }
+/* The hang: an empty stretch of wall, the work, and a column for its label */
+.hang {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, var(--fw)) minmax(var(--side), 1fr);
+  padding-inline: var(--gutter);
+}
+.hang > * { grid-column: 2; min-width: 0; }
+.hang > .beside { grid-column: 3; padding-left: var(--gap); }
+.hang > .span { grid-column: 2 / 4; }
 
-  /* ---------- Top bar ---------- */
-  .topbar {
-    position: sticky; top: 0; z-index: 20;
-    min-height: var(--bar);
-    display: flex; flex-wrap: wrap; align-items: center; gap: clamp(16px, 2.4vw, 36px);
-    padding-inline: var(--gutter);
-    background: var(--matte);
-    overflow-x: clip;
-  }
-  .brand {
-    display: inline-flex; align-items: center; gap: 12px;
-    min-height: 44px; margin-right: auto;
-    font: 700 1.1875rem/1 var(--display); letter-spacing: .01em;
-    text-decoration: none; white-space: nowrap;
-  }
-  .brand svg { width: 36px; height: auto; flex: none; }
-  .reels { display: flex; align-items: center; }
-  .reels ol {
-    display: flex; gap: 6px; margin: 0; padding: 0; list-style: none;
-  }
-  .reels li { position: relative; }
-  .reels ol a {
-    position: relative; display: block; width: 34px; height: 44px;
-    text-decoration: none;
-  }
-  .seg {
-    position: absolute; left: 0; right: 0; top: 50%; height: 3px; margin-top: -1.5px;
-    background: var(--dim); overflow: hidden;
-  }
-  .seg::after {
-    content: ""; position: absolute; inset: 0;
-    background: var(--c);
-    transform: scaleX(var(--fill, 0)); transform-origin: 0 50%;
-  }
-  .reels ol a:hover .seg { background: var(--leader); }
-  .tip {
-    position: absolute; top: calc(100% + 2px); left: 50%; transform: translateX(-50%);
-    padding: 6px 10px; background: var(--matte); white-space: nowrap;
-    font: 600 .9375rem/1 var(--display); letter-spacing: .02em; color: var(--tungsten);
-    opacity: 0; pointer-events: none;
-  }
-  .reels ol a:hover .tip, .reels ol a:focus-visible .tip { opacity: 1; }
-  .to-contact {
-    display: inline-flex; align-items: center; min-height: 44px;
-    font: 700 1.0625rem/1 var(--display); letter-spacing: .03em;
-    text-underline-offset: 6px; text-decoration-thickness: 1px; text-decoration-color: var(--leader);
-  }
+/* Entrance */
+.top { padding-top: 28px; }
+.top .span { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.home { display: inline-flex; color: var(--ink); padding: 4px; margin: -4px; }
+.home svg { width: 44px; height: auto; display: block; }
+.top nav ul { display: flex; flex-wrap: wrap; gap: 6px 28px; margin: 0; padding: 0; list-style: none; }
+.top nav a {
+  color: var(--ink); text-decoration: none; font-size: 15px; font-weight: 500;
+  padding: 6px 0; border-bottom: 1px solid transparent;
+}
+.top nav a:hover { border-bottom-color: currentColor; }
 
-  /* ---------- Shared type ---------- */
-  .title {
-    font-family: var(--display);
-    font-weight: 800;
-    font-size: clamp(3.5rem, min(10.5vw, 18vh), 10rem);
-    line-height: .86;
-    letter-spacing: -.004em;
-    text-wrap: balance;
-  }
-  .card { display: flex; flex-direction: column; align-items: flex-start; }
-  .year {
-    order: -1;
-    margin-bottom: .45em;
-    font: 500 clamp(1.25rem, 1rem + .8vw, 1.875rem)/1 var(--display);
-    letter-spacing: .02em;
-    color: var(--grade);
-    font-variant-numeric: tabular-nums;
-  }
-  .line {
-    max-width: 27em;
-    margin: 1em 0 1em;
-    font-style: italic;
-    font-size: clamp(1.0625rem, .92rem + .48vw, 1.375rem);
-    line-height: 1.45;
-    text-wrap: pretty;
-  }
-  .sub {
-    max-width: 40em;
-    color: var(--tungsten);
-    font-size: clamp(1rem, .86rem + .42vw, 1.3125rem);
-    line-height: 1.42;
-    text-wrap: balance;
-  }
-  .visit {
-    display: inline-flex; align-items: center; gap: .45em;
-    min-height: 44px; margin-top: .6em;
-    font: 700 clamp(1.0625rem, .98rem + .3vw, 1.3125rem)/1 var(--display);
-    letter-spacing: .03em;
-    text-decoration: underline;
-    text-decoration-color: var(--grade);
-    text-decoration-thickness: 2px;
-    text-underline-offset: 7px;
-  }
-  .visit svg { width: .8em; height: .8em; flex: none; }
-  .visit:hover { text-decoration-thickness: 4px; }
+.wall-text { padding-top: clamp(28px, 6vh, 72px); padding-bottom: clamp(56px, 9vh, 96px); }
+h1 {
+  margin: 0 0 0 -.04em;
+  font: 400 clamp(52px, 7.15vw, 124px)/.95 var(--serif);
+  letter-spacing: -.02em;
+  text-wrap: balance;
+}
+.lede { margin-top: clamp(18px, 2.4vh, 28px); }
+.byline { margin: 0; font-size: 16px; color: var(--ink-2); }
+.intro { margin-top: 22px; max-width: 34em; font: 400 20px/1.6 var(--serif); }
+.intro p { margin: 0 0 .7em; }
+.intro p:last-child { margin-bottom: 0; }
 
-  /* ---------- Calm sequence (reduced motion, or no JavaScript) ---------- */
-  .stage { position: relative; }
-  .frame, .counter, .cue { display: none; }
+.checklist { margin-top: clamp(18px, 2.4vh, 28px); align-self: start; }
+.wall-text > .checklist { padding-left: 32px; }
+.checklist h2 { margin: 0 0 10px; font: 500 14px/1.4 var(--sans); color: var(--ink-2); }
+.checklist ol { list-style: none; margin: 0; padding: 0; max-width: 270px; }
+.checklist a {
+  display: flex; align-items: baseline; gap: 8px;
+  color: var(--ink); text-decoration: none; padding: 3px 0;
+}
+.checklist .t { min-width: 0; overflow-wrap: break-word; font: italic 400 19px/1.3 var(--serif); }
+.checklist .dots { flex: 1; min-width: 8px; border-bottom: 1px dotted rgb(28 32 48 / .4); transform: translateY(-4px); }
+.checklist .y { font-size: 14px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.checklist a:hover .t { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .2em; }
 
-  .open {
-    min-height: calc(100vh - var(--bar));
-    display: grid; place-items: center;
-    padding: clamp(48px, 10vh, 120px) var(--gutter);
-    text-align: center;
-  }
-  .open .card { align-items: center; }
-  .open .mark { width: clamp(72px, 8vw, 116px); height: auto; margin-bottom: clamp(16px, 3vh, 28px); }
-  .open .title { font-size: clamp(3.25rem, min(9vw, 15vh), 9.5rem); }
-  .credit {
-    margin-top: .9em;
-    font-style: italic; color: var(--leader);
-    font-size: clamp(1.0625rem, .92rem + .48vw, 1.375rem);
-  }
-  .beats { margin-top: clamp(28px, 6vh, 56px); max-width: 34em; display: grid; gap: .5em; }
+/* The works */
+#work { overflow-x: clip; scroll-margin-top: min(40px, 5 * var(--vu)); }
+/* --ar is the window's width over its height, and --cap the frame width that keeps it
+   within nine tenths of a phone or tablet screen */
+.work { --ar: 1.6; --cap: max(var(--cap-min), calc((90 * var(--vu) - var(--chrome-y)) * var(--ar) + var(--chrome-x))); isolation: isolate; scroll-margin-top: min(40px, 5 * var(--vu)); }
+.work + .work { margin-top: var(--hang-gap); }
+.work.small { --fw: min(var(--fw-small), 100% - 2 * var(--side)); }
+.still { --ar: calc(1344 / var(--d-h)); }
 
-  .site {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, .3fr);
-    align-items: end;
-    gap: clamp(24px, 4vh, 40px) clamp(16px, 3vw, 48px);
-    max-width: 1320px; margin: 0 auto;
-    padding: clamp(72px, 14vh, 160px) var(--gutter) 0;
-  }
-  .shot { grid-row: 1; grid-column: 1; position: relative; aspect-ratio: 16 / 10; overflow: hidden; }
-  .lens, .strip { position: relative; }
-  .strip .full { display: none; }
-  .strip .hero { width: 100%; height: auto; }
-  /* the 7px bezel sits outside the screen (content-box), so the screen keeps the capture's own 780:1688 ratio and shows it whole */
-  .phone {
-    grid-row: 1; grid-column: 2;
-    position: relative; overflow: hidden;
-    box-sizing: content-box; aspect-ratio: 780 / 1688;
-    border: 7px solid var(--matte);
-    border-radius: 13% / 6%;
-    box-shadow: 0 0 0 1px rgba(243, 234, 219, .28), 0 30px 80px rgba(0, 0, 0, .7);
-  }
-  .phone img { width: 100%; height: auto; }   /* its own ratio, which is the screen's */
-  .site .card { grid-row: 2; grid-column: 1 / -1; }
-  .site .sub { margin: 0 0 .2em; color: var(--leader); }
+.piece { position: relative; }
+/* track light: a soft pool on the wall above each work */
+.piece::before {
+  content: "";
+  position: absolute;
+  left: -24%; right: -24%; top: max(-34%, calc(var(--hang-gap) * -0.8)); bottom: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(closest-side, rgb(var(--lit) / .95), rgb(var(--lit) / .5) 50%, rgb(var(--lit) / 0));
+}
+.frame {
+  padding: var(--mould);
+  border-radius: 1px;
+  background: linear-gradient(180deg, #3B3631 0%, var(--wood) 30%, #1E1B18 100%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / .14),
+    inset 0 -1px 0 rgb(0 0 0 / .45),
+    0 1px 1px rgb(30 24 18 / .22),
+    0 12px 16px -8px rgb(30 24 18 / .3),
+    0 38px 56px -26px rgb(30 24 18 / .38);
+}
+.mat {
+  padding: var(--mat-w);
+  background: var(--mat);
+  box-shadow: inset 0 2px 5px rgb(0 0 0 / .26), inset 0 0 0 1px rgb(0 0 0 / .22);
+}
+.window {
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgb(30 25 20 / .16), 0 1px 3px rgb(30 25 20 / .14);
+}
+.bar {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, auto) 1fr;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+  padding: 3px 7px 3px 11px;
+  background: var(--chrome);
+  border-bottom: 1px solid #D9D6D0;
+}
+.lights { display: flex; gap: 6px; }
+.lights i { width: 8px; height: 8px; border-radius: 50%; background: #D3D0CA; box-shadow: inset 0 0 0 1px rgb(0 0 0 / .08); }
+.addr {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  font-size: 12px; line-height: 1.3; color: var(--ink-2);
+  background: #FAFAF8; border-radius: 5px; padding: 4px 16px;
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / .06);
+}
+.hold {
+  justify-self: end;
+  visibility: hidden;
+  min-height: 24px;
+  font: 500 12px/1 var(--sans);
+  color: var(--ink-2);
+  background: transparent;
+  border: 1px solid #C5C2BB;
+  border-radius: 4px;
+  padding: 4px 9px;
+  cursor: pointer;
+}
+.js .hold { visibility: visible; }
+.hold:hover { background: #fff; color: var(--ink); }
+.hold:focus-visible { outline-offset: 2px; }
 
-  .credits {
-    padding: clamp(96px, 18vh, 200px) var(--gutter) clamp(72px, 12vh, 140px);
-    text-align: center;
-  }
-  .credits .mark { width: clamp(60px, 6vw, 84px); height: auto; margin: 0 auto clamp(20px, 3vh, 32px); }
-  .credits .title { font-size: clamp(3.25rem, 8.5vw, 8.5rem); text-wrap: balance; }
-  .contact {
-    display: flex; flex-wrap: wrap; justify-content: center; gap: 4px clamp(24px, 4vw, 56px);
-    margin: clamp(24px, 4vh, 40px) 0 0; padding: 0; list-style: none;
-  }
-  .contact a {
-    display: inline-flex; align-items: center; min-height: 48px;
-    font-size: clamp(1.375rem, 1rem + 1.3vw, 2.25rem); line-height: 1.2;
-    text-decoration-thickness: 1px; text-underline-offset: 8px; text-decoration-color: var(--leader);
-  }
-  .contact a:hover { text-decoration-color: var(--tungsten); }
-  .about {
-    max-width: 38em; margin: clamp(56px, 10vh, 112px) auto 0;
-    text-align: left;
-  }
-  .about h3 {
-    margin-bottom: .6em;
-    font: 700 1.1875rem/1 var(--display); letter-spacing: .03em; color: var(--leader);
-  }
-  .about p + p { margin-top: .9em; }
-  .thanks { margin-top: clamp(56px, 10vh, 112px); font-style: italic; color: var(--leader); }
+/* The screen holds a capture of the site at desktop size, or at 390 wide on a phone */
+.screen {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #fff;
+}
+.still .screen { aspect-ratio: 1344 / var(--d-h); }
+.screen img { display: block; width: 100%; height: auto; aspect-ratio: 1344 / var(--d-h); }
+.swap .screen img { opacity: 0; }
+.enter { position: absolute; inset: 0; z-index: 1; }
+.track { position: absolute; top: 4px; bottom: 4px; right: 3px; width: 6px; pointer-events: none; z-index: 2; }
+.thumb {
+  display: block; width: 100%; height: 100%;
+  border-radius: 3px;
+  background: rgb(70 70 74 / .55);
+  box-shadow: 0 0 0 1px rgb(255 255 255 / .55);
+}
 
-  /* ---------- The reel (motion allowed) ---------- */
-  .motion {
-    /* the bottom bar matches the top one, and grows when needed to hold the tallest subtitle (--sub-h, measured in fit()) */
-    --bar: clamp(60px, 11vh, 112px); --bar-b: max(var(--bar), var(--sub-h, 0px));
-    --card: min(40rem, 46vw); --phone-r: clamp(24px, 7vw, 128px);
-    overflow-anchor: none; /* the scroll position is the playhead, so the browser must not nudge it */
-  }
-  .motion .topbar { position: fixed; left: 0; right: 0; top: 0; height: var(--bar); flex-wrap: nowrap; }
-  .motion .stage {
-    position: sticky; top: 0;
-    height: 100vh; height: 100dvh;
-    overflow: hidden;
-    background: var(--matte);
-    container-type: size;
-  }
-  .motion .scene {
-    position: absolute; inset: 0;
-    display: grid; grid-template-rows: var(--bar) minmax(0, 1fr) var(--bar-b); grid-template-columns: minmax(0, 1fr);
-    max-width: none; margin: 0; padding: 0; gap: 0;
-    opacity: 0; pointer-events: none;
-  }
-  .motion .scene.is-on { opacity: 1; pointer-events: auto; z-index: 1; }
+.label { align-self: end; position: relative; z-index: -1; }
+.card {
+  max-width: 252px;
+  background: var(--card);
+  padding: 18px 20px 20px;
+  border-radius: 1px;
+  box-shadow: 0 1px 1px rgb(40 32 24 / .12), 0 4px 10px -3px rgb(40 32 24 / .12);
+}
+.card h3 { margin: 0; font: italic 400 23px/1.15 var(--serif); letter-spacing: -.005em; text-wrap: balance; overflow-wrap: break-word; }
+.card .when { margin: 6px 0 0; font-size: 14px; font-variant-numeric: tabular-nums; }
+.card .medium { margin: 0; font-size: 14px; color: var(--ink-2); }
+.card .desc { margin: 12px 0 0; font-size: 14.5px; line-height: 1.5; }
+.card .visit { display: inline-block; margin-top: 14px; font-size: 14.5px; font-weight: 500; }
 
-  /* the picture area between the bars, and the shutter that cuts between reels */
-  .motion .frame {
-    display: block; position: absolute; z-index: 6; left: 0; right: 0;
-    top: var(--bar); bottom: var(--bar-b); pointer-events: none;
-  }
-  .shutter {
-    position: absolute; left: 0; right: 0; height: calc(50% + 1px);
-    background: var(--matte);
-    transform: scaleY(0);
-    transition: transform 340ms cubic-bezier(.16, 1, .3, 1);
-  }
-  .shutter.top { top: 0; transform-origin: 50% 0; }
-  .shutter.bottom { bottom: 0; transform-origin: 50% 100%; }
-  .shutter.top::after {
-    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(243, 234, 219, .5) 30%, rgba(243, 234, 219, .5) 70%, transparent);
-  }
-  .is-shut .shutter { transform: scaleY(1); transition: transform 260ms cubic-bezier(.7, 0, .84, 0); }
+/* Statement and front desk */
+.statement { padding-top: clamp(150px, 22vh, 230px); }
+.statement h2, .desk h2 {
+  margin: 0 0 22px;
+  font: 400 clamp(38px, 4vw, 52px)/1 var(--serif);
+  letter-spacing: -.015em;
+}
+.statement .words { max-width: 34em; font: 400 20px/1.62 var(--serif); }
+.statement .words p { margin: 0 0 .8em; }
+.signed { display: flex; align-items: center; gap: 12px; margin: 26px 0 0; font-size: 15px; color: var(--ink-2); }
+.signed svg { width: 30px; height: auto; color: var(--ink); flex: none; }
 
-  /* the site's screenshot, drifting down its own page */
-  .motion .site .shot, .motion .site .phone { grid-area: auto; align-self: auto; justify-self: auto; }
-  .motion .site .shot {
-    position: absolute; left: 0; right: 0; top: var(--bar); bottom: var(--bar-b);
-    aspect-ratio: auto; z-index: 0;
-  }
-  .motion .lens { position: absolute; inset: 0; transform-origin: 50% 40%; }
-  .motion .strip { position: absolute; left: 0; top: 0; width: 100%; will-change: transform; }
-  /* a capture shorter than the picture (a short page on a tall screen) fades into the black instead of ending on a hard edge */
-  .motion .site.short .strip { -webkit-mask-image: linear-gradient(#000 72%, transparent); mask-image: linear-gradient(#000 72%, transparent); }
-  .motion .strip .full { display: block; width: 100%; height: auto; }
-  .motion .strip .hero { position: absolute; left: 0; top: 0; }
-  .motion .site .shot::after {
-    content: ""; position: absolute; inset: 0; pointer-events: none;
-    background:
-      linear-gradient(90deg, rgba(0,0,0,.92) 0%, rgba(0,0,0,.87) 40%, rgba(0,0,0,.56) 60%, rgba(0,0,0,.3) 100%),
-      linear-gradient(0deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 45%);
-  }
-  .motion .is-on .lens { animation: settle 9s cubic-bezier(.2, .6, .2, 1) both; }
+.desk { padding-top: clamp(110px, 16vh, 170px); padding-bottom: clamp(90px, 14vh, 140px); }
+.counter {
+  background: var(--card);
+  padding: clamp(28px, 4vw, 48px);
+  box-shadow: 0 1px 1px rgb(40 32 24 / .12), 0 8px 18px -8px rgb(40 32 24 / .16);
+}
+.desk p { margin: 0; font-size: 17px; }
+.desk .mail {
+  display: inline-block;
+  margin-top: 22px;
+  font: italic 400 clamp(25px, 3.4vw, 42px)/1.15 var(--serif);
+  overflow-wrap: break-word;
+}
+.desk .at { font: 400 .8em/1 var(--sans); }
+.desk .elsewhere { margin-top: 18px; font-size: 16px; }
+.desk .elsewhere a { font-weight: 500; }
 
-  /* 86% of the picture's height (--ph, bezel included), centered, but never wider than the room the card leaves */
-  .motion .site .phone {
-    --ph: min((100cqh - var(--bar) - var(--bar-b)) * .86, (100cqw - var(--gutter) - var(--card) - var(--phone-r) - 38px) * 1688 / 780 + 14px);
-    position: absolute; z-index: 2; margin: 0;
-    right: var(--phone-r);
-    top: calc(var(--bar) + (100cqh - var(--bar) - var(--bar-b) - var(--ph)) / 2);
-    height: calc(var(--ph) - 14px);
-    width: auto;
-  }
-  .motion .is-on .phone { animation: slide-in 1000ms cubic-bezier(.16, 1, .3, 1) 140ms both; }
+footer { padding-bottom: 40px; font-size: 14px; color: var(--ink-2); }
+footer p { margin: 0; }
 
-  .motion .site .card {
-    grid-row: 2; grid-column: 1; z-index: 3;
-    align-self: end; justify-self: start;
-    width: var(--card);
-    margin: 0 0 clamp(20px, 5vh, 56px) var(--gutter);
-  }
-  .motion .is-on .card { animation: cut-in 10ms steps(1, end) 260ms both; }
+/* One column below the width where labels fit beside the work */
+@media (max-width: 1099px) {
+  :root { --gutter: 32px; --fw: 760px; --fw-small: min(560px, (100vw - 2 * var(--gutter)) * .74); }
+  .hang { grid-template-columns: minmax(0, var(--fw)); justify-content: center; }
+  .hang > *, .hang > .beside, .hang > .span { grid-column: 1; }
+  .hang > .beside { padding-left: 0; }
+  .work { --frame-w: min(100%, var(--cap)); }
+  .work.small { --fw: var(--fw-small); }
+  /* a small work stays about three quarters as wide as the big ones, even when a short screen shrinks every frame */
+  .work.small { --frame-w: min(100%, var(--cap), .74 * max(var(--cap-min), (90 * var(--vu) - var(--chrome-y)) * 1.6 + var(--chrome-x))); }
+  .work > .piece { width: var(--frame-w); }
+  .work.small > .piece, .work.small > .label { justify-self: center; }
+  .work.small > .label { width: var(--frame-w); }
+  .label { margin-top: 26px; }
+  .checklist { margin-top: 40px; }
+  .wall-text { padding-bottom: 88px; }
+  h1 { font-size: min(81px, calc((100vw - 64px) / 9.6)); }
+}
 
-  .motion .sub, .motion .beats {
-    position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
-    height: var(--bar-b);
-    width: min(38em, calc(100% - 2 * (var(--gutter) + 9.5rem)));
-    margin: 0 auto;
-    display: flex; align-items: center; justify-content: center;
-    text-align: center; color: var(--tungsten);
-  }
-  /* the opening's counter label is longer, so its subtitles leave it more room */
-  .motion .beats { display: grid; place-items: center; max-width: none; gap: 0; width: min(38em, calc(100% - 2 * (var(--gutter) + 11.5rem))); }
-  .motion .beat { grid-area: 1 / 1; opacity: 0; }
-  .motion .beat.is-on { opacity: 1; }
+/* Tablets: the room guide still fits beside the intro, which keeps the first work in view */
+@media (min-width: 800px) and (max-width: 1099px) {
+  .wall-text { grid-template-columns: minmax(0, calc(var(--fw) - 300px)) minmax(0, 300px); }
+  .wall-text > .span { grid-column: 1 / 3; }
+  .wall-text > .checklist { grid-column: 2; padding-left: 32px; margin-top: clamp(18px, 2.4vh, 28px); }
+  .wall-text { padding-bottom: clamp(56px, 9vh, 88px); }
+}
 
-  .motion .open { min-height: 0; padding: 0; place-items: initial; }
-  .motion .open .card {
-    grid-row: 2; align-self: center; justify-self: center;
-    padding: 0 var(--gutter);
-    background: radial-gradient(closest-side, rgba(243, 234, 219, .07), rgba(243, 234, 219, 0));
-  }
-  .motion .open .title { font-size: clamp(3.25rem, min(9vw, 14vh), 9.5rem); }
-  .motion .cue {
-    display: block; margin-top: clamp(20px, 5vh, 48px);
-    font: 600 1rem/1 var(--display); letter-spacing: .04em; color: var(--leader);
-  }
-  .motion .cue::after {
-    content: ""; display: block; width: 1px; height: clamp(20px, 4vh, 36px);
-    margin: 12px auto 0; background: var(--leader);
-  }
 
-  .motion .counter {
-    display: flex; position: fixed; z-index: 8; left: 0; right: 0; bottom: 0;
-    height: var(--bar-b); padding-inline: var(--gutter);
-    align-items: center; justify-content: space-between;
-    pointer-events: none;
-    font: 600 1rem/1 var(--display); letter-spacing: .05em; color: var(--leader);
-    font-variant-numeric: tabular-nums;
-    transition: opacity .2s;
-  }
-  .count { display: inline-flex; align-items: center; gap: 10px; color: var(--tungsten); }
-  .count::before { content: ""; width: 9px; height: 9px; background: var(--grade); }
-  .motion.in-credits .counter { opacity: 0; }
+/* Phones: each frame hangs the site's phone view, with Safari's address bar along the bottom */
+@media (max-width: 640px) {
+  :root { --gutter: 20px; --mould: 7px; --mat-w: 14px; --bar-h: 34px; --fw: 100%; --hang-gap: 96px; --cap-min: 220px; }
+  .work, .work.small { --fw: min(300px, 78vw); --ar: calc(390 / 844); --frame-w: min(100%, var(--cap)); }
+  .work.still { --ar: calc(780 / var(--m-h)); }
+  .work > .piece { justify-self: center; }
+  .work > .label { width: var(--frame-w); justify-self: center; }
+  .home svg { width: 38px; }
+  .top nav ul { gap: 6px 20px; }
+  h1 { font-size: clamp(44px, 15vw, 72px); }
+  h1 span { display: block; }
+  .intro, .statement .words { font-size: 18.5px; }
+  .wall-text { padding-bottom: 72px; }
+  .bar { order: 2; grid-template-columns: minmax(0, 1fr) auto; min-height: 34px; padding: 4px 6px 4px 8px; border-bottom: 0; border-top: 1px solid #D9D6D0; }
+  .lights, .track { display: none; }
+  .addr { justify-self: start; font-size: 11px; padding: 4px 8px; }
+  .hold { padding: 4px 8px; }
+  .window { border-radius: 14px; }
+  .screen { aspect-ratio: 390 / 844; }
+  .still .screen { aspect-ratio: 780 / var(--m-h); }
+  .screen img { aspect-ratio: 780 / var(--m-h); }
+  .card { max-width: none; }
+  .piece::before { left: -30%; right: -30%; }
+}
 
-  .motion .credits { position: relative; z-index: 1; background: var(--matte); }
+@media (forced-colors: active) {
+  .frame, .window, .card, .counter { border: 1px solid CanvasText; }
+  .thumb { background: CanvasText; }
+  .piece::before { display: none; }
+}
 
-  @keyframes settle { from { transform: scale(1.06); } to { transform: none; } }
-  @keyframes slide-in { from { transform: translateX(calc(100% + 14vw)); } to { transform: none; } }
-  @keyframes cut-in { from { opacity: 0; } to { opacity: 1; } }
-  @keyframes settle-in { from { transform: scale(.94); } to { transform: none; } }
-
-  /* ---------- Phones: a vertical reel (short ones in landscape keep the wide reel), and a two-row bar ---------- */
-  @media (max-width: 720px) and (orientation: portrait), (max-width: 720px) and (min-height: 561px), (max-width: 639px) {
-    :root { --bar: 92px; }
-    .topbar {
-      display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: minmax(52px, auto) 28px;
-      align-items: center; align-content: start; column-gap: 12px; row-gap: 0;
-      padding-bottom: 8px;
-    }
-    .brand { font-size: 1.125rem; gap: 10px; white-space: normal; }
-    .brand svg { width: 30px; }
-    .reels { grid-row: 2; grid-column: 1 / -1; }
-    .reels ol { flex: 1; gap: 3px; }
-    .reels li { flex: 1; }
-    .reels ol a { width: auto; height: 28px; }
-    .reels li:nth-child(-n+3) .tip { left: 0; transform: none; }
-    .reels li:nth-child(n+4) .tip { left: auto; right: 0; transform: none; }
-    .to-contact { grid-row: 1; grid-column: 2; }
-
-    .site { grid-template-columns: minmax(0, 1fr); padding-top: 72px; }
-    .site .phone { grid-column: 1; grid-row: 1; justify-self: end; align-self: end; width: calc(34% - 14px); margin: 0 10px -14% 0; }
-    .site .card { padding-top: 7%; }
-
-    .motion { --bar: 92px; --bar-b: max(120px, var(--sub-h, 0px)); }
-    .motion .counter { display: none; }
-    .motion .sub, .motion .beats { width: calc(100% - 2 * var(--gutter)); font-size: .9375rem; }
-
-    /* the phone capture stands whole in its mockup, centered in the room the card leaves above it, on black. It is sized
-       for the browser's toolbar showing, so the toolbar never resizes it; where it would stand under 120px it steps aside
-       for that reel and the card centers in the picture (see placePhone()) */
-    .motion .site { grid-template-rows: var(--bar) minmax(0, 1fr) auto var(--bar-b); }
-    .motion .site .phone {
-      position: relative; grid-row: 2; grid-column: 1; justify-self: center; align-self: center;
-      top: auto; right: auto; width: auto; z-index: 0;
-      height: calc(100% - 50px); height: calc(100% - 50px - (100dvh - 100svh));   /* 18px clear above and below, plus the bezel */
-    }
-    .motion .is-on .phone { animation: settle-in 900ms cubic-bezier(.16, 1, .3, 1) 140ms both; }
-    .motion .site.no-phone .phone { display: none; }
-    .motion .site.no-phone .card { grid-row: 2 / 4; align-self: center; }
-    .motion .site .shot { display: none; }
-    .motion .site .card { grid-row: 3; width: auto; margin: 0 var(--gutter) 18px; padding: 0; }
-  }
-
-  /* Short landscape screens, phones included: thinner bars, a wider card on a scrim that follows it, tighter spacing,
-     and the opening label stacks so the subtitles keep their width */
-  @media (max-height: 560px) and (orientation: landscape) {
-    .motion {
-      --bar: 52px; --bar-b: max(76px, var(--sub-h, 0px));
-      --card: min(40rem, 100cqw - var(--gutter) - var(--phone-r) - ((100cqh - var(--bar) - var(--bar-b)) * .86 - 14px) * 780 / 1688 - 38px);
-    }
-    .motion .site .shot::after {
-      background:
-        linear-gradient(90deg, rgba(0,0,0,.92) 0%, rgba(0,0,0,.87) calc(var(--gutter) + var(--card)), rgba(0,0,0,.56) calc(var(--gutter) + var(--card) + 20%), rgba(0,0,0,.3) 100%),
-        linear-gradient(0deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 45%);
-    }
-    .motion .site .card { margin-bottom: 12px; }
-    .motion .site .title { font-size: clamp(2.75rem, min(8vw, 15vh), 6rem); }
-    .motion .line { font-size: 1rem; max-width: 36em; margin: .6em 0; }
-    .motion .visit { margin-top: 0; }
-    .motion .sub, .motion .beats { font-size: 1rem; }
-    .motion .beats { width: min(38em, calc(100% - 2 * (var(--gutter) + 9.5rem))); }
-    .motion .count { white-space: pre-line; }
-    .motion .open .mark { width: 56px; margin-bottom: 10px; }
-    .motion .cue { margin-top: 14px; }
-    .motion .cue::after { height: 14px; margin-top: 8px; }
-  }
-
-  /* Very short landscape (a toolbar appeared after the reel started): the quote leaves the reel cards but stays for screen readers */
-  @media (max-height: 360px) and (orientation: landscape) {
-    .motion .site .line {
-      position: absolute; width: 1px; height: 1px; margin: 0;
-      overflow: hidden; clip-path: inset(50%); white-space: nowrap;
-    }
-    .motion .open .mark { width: 44px; }
-    .motion .cue::after { display: none; }
-  }
-
-  /* on a very short screen the calm sequence's top bar scrolls away instead of covering it */
-  @media (max-height: 400px) {
-    .topbar { position: relative; }
-  }
-
-  /* contrast themes get the calm sequence (see REEL): the reel strip keeps system colors, and the title's backplate clears the year */
-  @media (forced-colors: active) {
-    .seg { forced-color-adjust: none; height: 7px; margin-top: -3.5px; border: 1px solid CanvasText; background: Canvas; }
-    .seg::after { background: Highlight; }
-    .title { line-height: 1.2; }
-  }
-
-  /* print the calm sequence (the script switches to it) in dark ink, without the bars */
-  @media print {
-    :root { --matte: #fff; --tungsten: #111; --leader: #555; }
-    html { color-scheme: light; }
-    .skip, .topbar, .counter { display: none; }
-    .year { color: var(--tungsten); }
-    .site { break-inside: avoid; }
-  }
+@media print {
+  html, body { background: #fff; }
+  .skip, .top nav, .hold, .track, .piece::before { display: none !important; }
+  .screen img, .thumb { transform: none !important; }
+  .swap .screen img { opacity: 1; object-fit: contain; object-position: top; }
+  .frame, .mat, .card, .counter { box-shadow: none; }
+  .frame { background: #2A2622; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .window { display: block; }
+  .work, .statement, .desk { break-inside: avoid; }
+  .work + .work { margin-top: 48px; }
+  .statement, .desk { padding-top: 48px; }
+}
 </style>
 </head>
 <body>
-<a class="skip" href="#contact">Skip to contact</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="peak" viewBox="0 0 64 52">
+    <path fill="currentColor" d="M1 50 22 22l3 2L35 4l28 46z"/>
+    <path fill="#FBFAF7" d="M35 4l9.13 15L41 17.6l-2.8 3-3-3.2L32 20l-3.5-3z"/>
+  </symbol>
+</svg>
+<a class="skip" href="#work">Skip to the work</a>
 
-<header class="topbar">
-  <a class="brand" href="#top">
-    <svg viewBox="0 0 100 80" aria-hidden="true" focusable="false"><path fill="#948c80" d="M2 78 30 41l6 3 10-19 6-15 4-7 3 6 6 9 6 7 6 9 6 6 15 38Z"/><path fill="#f3eadb" d="m46 25 6-15 4-7 3 6 6 9 6 7-5 3-4-4-4 6-4-6-4 5-4-5Z"/></svg>
-    <span>Dimitri Cole Designs.</span>
-  </a>
-  <nav class="reels" aria-label="Reels">
-    <ol>
-      <li><a href="#ovenlight" data-i="1" style="--c:#f0a35e"><span class="seg"></span><span class="tip"><span class="sr">Reel 1, </span>Ovenlight</span></a></li>
-      <li><a href="#glitch" data-i="2" style="--c:#ff4d4d"><span class="seg"></span><span class="tip"><span class="sr">Reel 2, </span>Glitch</span></a></li>
-      <li><a href="#snowyghost" data-i="3" style="--c:#c9dcf0"><span class="seg"></span><span class="tip"><span class="sr">Reel 3, </span>Snowy Ghost</span></a></li>
-      <li><a href="#patrick" data-i="4" style="--c:#ee8fdc"><span class="seg"></span><span class="tip"><span class="sr">Reel 4, </span>Patrick</span></a></li>
-      <li><a href="#dimitricole" data-i="5" style="--c:#ffb38a"><span class="seg"></span><span class="tip"><span class="sr">Reel 5, </span>Dimitri Cole</span></a></li>
-      <li><a href="#rhinelander" data-i="6" style="--c:#ffd54a"><span class="seg"></span><span class="tip"><span class="sr">Reel 6, </span>Rhinelander</span></a></li>
-    </ol>
-  </nav>
-  <a class="to-contact" href="#contact">Contact</a>
+<header class="top hang">
+  <div class="span">
+    <a class="home" href="#top" aria-label="Dimitri Cole Designs, back to the top">
+      <svg viewBox="0 0 64 52" aria-hidden="true"><use href="#peak"/></svg>
+    </a>
+    <nav aria-label="Sections">
+      <ul>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
 </header>
 
-<div class="counter" aria-hidden="true"><span class="count">Six reels,&#10;newest first</span><span class="tc">00:00:00:00</span></div>
+<main>
+  <section class="wall-text hang" aria-labelledby="show-title">
+    <h1 id="show-title" class="span"><span>Dimitri Cole</span> <span>Designs.</span></h1>
+    <div class="lede">
+      <p class="byline">Freelance web design by Dimitri Cole Restaino, New York</p>
+      <div class="intro">
+        <p>Hi, I&rsquo;m Dimitri! By day I lead customer solutions at a fintech company. The rest of the time I build smaller passion projects as life allows.</p>
+        <p>Find some of my most recent work below, and please reach out if you would like to work together!</p>
+      </div>
+    </div>
+    <nav class="checklist beside" aria-labelledby="checklist-h">
+      <h2 id="checklist-h">Six sites, newest first</h2>
+      <ol>
+        <li><a href="#ovenlight"><span class="t">Ovenlight</span> <span class="dots" aria-hidden="true"></span> <span class="y">2026</span></a></li>
+        <li><a href="#glitch"><span class="t">Glitch</span> <span class="dots" aria-hidden="true"></span> <span class="y">2026</span></a></li>
+        <li><a href="#snowyghost"><span class="t">Snowy Ghost</span> <span class="dots" aria-hidden="true"></span> <span class="y">2025</span></a></li>
+        <li><a href="#patrick"><span class="t">Patrick the Artist</span> <span class="dots" aria-hidden="true"></span> <span class="y">2021</span></a></li>
+        <li><a href="#dimitricole"><span class="t">dimitricole.com</span> <span class="dots" aria-hidden="true"></span> <span class="y">2019</span></a></li>
+        <li><a href="#rhinelander"><span class="t">Rhinelander Auto Body</span> <span class="dots" aria-hidden="true"></span> <span class="y">2019</span></a></li>
+      </ol>
+    </nav>
+  </section>
 
-<main class="track">
-  <div class="stage">
+  <section id="work" aria-labelledby="work-h">
+    <h2 id="work-h" class="vh">Work</h2>
 
-    <section class="scene open" id="top" data-len="1.5" aria-labelledby="t-top">
-      <div class="card">
-        <svg class="mark" viewBox="0 0 100 80" aria-hidden="true" focusable="false"><path fill="#948c80" d="M2 78 30 41l6 3 10-19 6-15 4-7 3 6 6 9 6 7 6 9 6 6 15 38Z"/><path fill="#f3eadb" d="m46 25 6-15 4-7 3 6 6 9 6 7-5 3-4-4-4 6-4-6-4 5-4-5Z"/></svg>
-        <h1 class="title" id="t-top" tabindex="-1">Dimitri Cole Designs.</h1>
-        <p class="credit">Freelance web design by Dimitri Cole Restaino in New York</p>
-        <p class="cue" aria-hidden="true">Scroll to play the reel</p>
-        <div class="beats">
-          <p class="beat">Hi, I’m Dimitri! By day I lead customer solutions at a fintech company.</p>
-          <p class="beat">The rest of the time I build smaller passion projects as life allows.</p>
-          <p class="beat">Here are six of my most recent sites, newest first. Please reach out if you would like to work together!</p>
+    <article class="work hang" id="ovenlight" data-glide style="--d-h: 8153; --d-page: 8792; --m-h: 7239" aria-labelledby="ovenlight-t">
+      <div class="piece">
+        <div class="frame"><div class="mat"><div class="window">
+          <div class="bar">
+            <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="addr" aria-hidden="true">ovenlight.app</span>
+            <button class="hold" type="button"><span class="word">Pause</span><span class="vh"> the Ovenlight preview</span></button>
+          </div>
+          <div class="screen">
+            <picture>
+              <source media="(max-width: 640px)" type="image/avif" srcset="images/work/ovenlight-mobile.avif">
+              <source media="(max-width: 640px)" srcset="images/work/ovenlight-mobile.jpg">
+              <source type="image/avif" srcset="images/work/ovenlight-desktop.avif">
+              <img src="images/work/ovenlight-desktop.jpg" width="1344" height="8153" alt="The Ovenlight website: a serif wordmark over a glowing warm light in cream and brown." decoding="async" fetchpriority="high">
+            </picture>
+            <a class="enter" href="https://ovenlight.app" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"></a>
+            <span class="track" aria-hidden="true"><span class="thumb"></span></span>
+          </div>
+        </div></div></div>
+      </div>
+      <div class="label beside">
+        <div class="card">
+          <h3 id="ovenlight-t">Ovenlight</h3>
+          <p class="when">2026</p>
+          <p class="medium">Design and build</p>
+          <p class="desc">The website for Ovenlight, my iPhone app.</p>
+          <a class="visit" href="https://ovenlight.app" target="_blank" rel="noopener">Visit ovenlight.app<span class="vh"> (opens in a new tab)</span></a>
         </div>
       </div>
-    </section>
+    </article>
 
-    <section class="scene site" id="ovenlight" data-len="1.5" data-fullh="4325" style="--grade:#f0a35e" aria-labelledby="t-ovenlight">
-      <div class="card">
-        <h2 class="title" id="t-ovenlight" tabindex="-1">Ovenlight</h2>
-        <p class="year">2026</p>
-        <p class="line">“You or your coding agent built a web app. It runs on your own computer, and Ovenlight opens it on your iPhone behind Face ID.”</p>
-        <p class="sub">The website for Ovenlight, my iPhone app. Its serif wordmark sits in a warm, glowing light.</p>
-        <a class="visit" href="https://ovenlight.app" target="_blank" rel="noopener">Visit ovenlight.app<span class="sr"> (opens in a new tab)</span><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5 3h8v8M13 3 3 13" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+    <article class="work hang" id="glitch" data-glide style="--d-h: 5685; --d-page: 5685; --m-h: 7886" aria-labelledby="glitch-t">
+      <div class="piece">
+        <div class="frame"><div class="mat"><div class="window">
+          <div class="bar">
+            <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="addr" aria-hidden="true">playglitchgame.com</span>
+            <button class="hold" type="button"><span class="word">Pause</span><span class="vh"> the Glitch preview</span></button>
+          </div>
+          <div class="screen">
+            <picture>
+              <source media="(max-width: 640px)" type="image/avif" srcset="images/work/glitch-mobile.avif">
+              <source media="(max-width: 640px)" srcset="images/work/glitch-mobile.jpg">
+              <source type="image/avif" srcset="images/work/glitch-desktop.avif">
+              <img src="images/work/glitch-desktop.jpg" width="1344" height="5685" alt="The Glitch website: the GL!TCH wordmark, an identity card that flips to a role, and a table for trying a round." loading="lazy" decoding="async">
+            </picture>
+            <a class="enter" href="https://playglitchgame.com" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"></a>
+            <span class="track" aria-hidden="true"><span class="thumb"></span></span>
+          </div>
+        </div></div></div>
       </div>
-      <div class="shot"><div class="lens"><div class="strip">
-        <img class="full" src="images/reel/ovenlight-full.jpg" width="960" height="4325" alt="" loading="lazy" decoding="async">
-        <img class="hero" src="images/reel/ovenlight-hero.jpg" width="1600" height="1000" alt="The first screen of ovenlight.app on a desktop" decoding="async">
-      </div></div></div>
-      <figure class="phone"><img src="images/reel/ovenlight-phone.jpg" width="780" height="1688" alt="ovenlight.app on a phone" decoding="async"></figure>
-    </section>
-
-    <section class="scene site" id="glitch" data-len="1.5" data-fullh="2875" style="--grade:#ff4d4d" aria-labelledby="t-glitch">
-      <div class="card">
-        <h2 class="title" id="t-glitch" tabindex="-1">Glitch</h2>
-        <p class="year">2026</p>
-        <p class="line">“Not everyone in the room is human.”</p>
-        <p class="sub">The website for Glitch, my party game of robots, humans and hidden roles. You can play a round right in the browser.</p>
-        <a class="visit" href="https://playglitchgame.com" target="_blank" rel="noopener">Visit playglitchgame.com<span class="sr"> (opens in a new tab)</span><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5 3h8v8M13 3 3 13" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+      <div class="label beside">
+        <div class="card">
+          <h3 id="glitch-t">Glitch</h3>
+          <p class="when">2026</p>
+          <p class="medium">Design and build</p>
+          <p class="desc">The website for Glitch, my party game of robots, humans and hidden roles.</p>
+          <a class="visit" href="https://playglitchgame.com" target="_blank" rel="noopener">Visit playglitchgame.com<span class="vh"> (opens in a new tab)</span></a>
+        </div>
       </div>
-      <div class="shot"><div class="lens"><div class="strip">
-        <img class="full" src="images/reel/glitch-full.jpg" width="960" height="2875" alt="" loading="lazy" decoding="async">
-        <img class="hero" src="images/reel/glitch-hero.jpg" width="1600" height="1000" alt="The first screen of playglitchgame.com on a desktop" decoding="async">
-      </div></div></div>
-      <figure class="phone"><img src="images/reel/glitch-phone.jpg" width="780" height="1688" alt="playglitchgame.com on a phone" decoding="async"></figure>
-    </section>
+    </article>
 
-    <section class="scene site" id="snowyghost" data-len="1.5" data-fullh="3532" style="--grade:#c9dcf0" aria-labelledby="t-snowyghost">
-      <div class="card">
-        <h2 class="title" id="t-snowyghost" tabindex="-1">Snowy Ghost</h2>
-        <p class="year">2025, redesigned 2026</p>
-        <p class="line">“Snowy Ghost is an innovation company.”</p>
-        <p class="sub">The home of Snowy Ghost, my app company in New York. Press the ghost and he shakes off the snow.</p>
-        <a class="visit" href="https://snowyghost.com" target="_blank" rel="noopener">Visit snowyghost.com<span class="sr"> (opens in a new tab)</span><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5 3h8v8M13 3 3 13" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+    <article class="work hang" id="snowyghost" data-glide style="--d-h: 6950; --d-page: 6950; --m-h: 8147" aria-labelledby="snowyghost-t">
+      <div class="piece">
+        <div class="frame"><div class="mat"><div class="window">
+          <div class="bar">
+            <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="addr" aria-hidden="true">snowyghost.com</span>
+            <button class="hold" type="button"><span class="word">Pause</span><span class="vh"> the Snowy Ghost preview</span></button>
+          </div>
+          <div class="screen">
+            <picture>
+              <source media="(max-width: 640px)" type="image/avif" srcset="images/work/snowyghost-mobile.avif">
+              <source media="(max-width: 640px)" srcset="images/work/snowyghost-mobile.jpg">
+              <source type="image/avif" srcset="images/work/snowyghost-desktop.avif">
+              <img src="images/work/snowyghost-desktop.jpg" width="1344" height="6950" alt="The Snowy Ghost website: hand-drawn type, snow falling in the logo's line style, and the ghost buried in snow." loading="lazy" decoding="async">
+            </picture>
+            <a class="enter" href="https://snowyghost.com" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"></a>
+            <span class="track" aria-hidden="true"><span class="thumb"></span></span>
+          </div>
+        </div></div></div>
       </div>
-      <div class="shot"><div class="lens"><div class="strip">
-        <img class="full" src="images/reel/snowyghost-full.jpg" width="960" height="3532" alt="" loading="lazy" decoding="async">
-        <img class="hero" src="images/reel/snowyghost-hero.jpg" width="1600" height="1000" alt="The first screen of snowyghost.com on a desktop" decoding="async">
-      </div></div></div>
-      <figure class="phone"><img src="images/reel/snowyghost-phone.jpg" width="780" height="1688" alt="snowyghost.com on a phone" decoding="async"></figure>
-    </section>
-
-    <section class="scene site" id="patrick" data-len="1.5" data-fullh="600" style="--grade:#ee8fdc" aria-labelledby="t-patrick">
-      <div class="card">
-        <h2 class="title" id="t-patrick" tabindex="-1">Patrick</h2>
-        <p class="year">2021</p>
-        <p class="line">“Hi, I’m Patrick the Artist. I make character art for people to enjoy.”</p>
-        <p class="sub">A portfolio for Patrick, the best artist that I know.</p>
-        <a class="visit" href="https://patricktheartist.com" target="_blank" rel="noopener">Visit patricktheartist.com<span class="sr"> (opens in a new tab)</span><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5 3h8v8M13 3 3 13" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+      <div class="label beside">
+        <div class="card">
+          <h3 id="snowyghost-t">Snowy Ghost</h3>
+          <p class="when">2025, redesigned 2026</p>
+          <p class="medium">Design and build</p>
+          <p class="desc">The home of Snowy Ghost, my app company in New York.</p>
+          <a class="visit" href="https://snowyghost.com" target="_blank" rel="noopener">Visit snowyghost.com<span class="vh"> (opens in a new tab)</span></a>
+        </div>
       </div>
-      <div class="shot"><div class="lens"><div class="strip">
-        <img class="full" src="images/reel/patrick-full.jpg" width="960" height="600" alt="" loading="lazy" decoding="async">
-        <img class="hero" src="images/reel/patrick-hero.jpg" width="1600" height="1000" alt="The first screen of patricktheartist.com on a desktop" decoding="async">
-      </div></div></div>
-      <figure class="phone"><img src="images/reel/patrick-phone.jpg" width="780" height="1688" alt="patricktheartist.com on a phone" decoding="async"></figure>
-    </section>
-    <section class="scene site" id="dimitricole" data-len="1.5" data-fullh="7116" style="--grade:#ffb38a" aria-labelledby="t-dimitricole">
-      <div class="card">
-        <h2 class="title" id="t-dimitricole" tabindex="-1">Dimitri Cole</h2>
-        <p class="year">2019, redesigned 2026</p>
-        <p class="line">“Solutions architecture for AI, cloud, and agentic finance.”</p>
-        <p class="sub">My own site, where my career reads as a descent from a night summit to a daylight trailhead.</p>
-        <a class="visit" href="https://dimitricole.com" target="_blank" rel="noopener">Visit dimitricole.com<span class="sr"> (opens in a new tab)</span><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5 3h8v8M13 3 3 13" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+    </article>
+
+    <article class="work small still hang" id="patrick" style="--d-h: 840; --m-h: 1688" aria-labelledby="patrick-t">
+      <div class="piece">
+        <div class="frame"><div class="mat"><div class="window">
+          <div class="bar">
+            <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="addr" aria-hidden="true">patricktheartist.com</span>
+            <span aria-hidden="true"></span>
+          </div>
+          <div class="screen">
+            <picture>
+              <source media="(max-width: 640px)" type="image/avif" srcset="images/work/patrick-mobile.avif">
+              <source media="(max-width: 640px)" srcset="images/work/patrick-mobile.jpg">
+              <source type="image/avif" srcset="images/work/patrick-desktop.avif">
+              <img src="images/work/patrick-desktop.jpg" width="1344" height="840" alt="Patrick's portfolio: his colorful character faces with his introduction." loading="lazy" decoding="async">
+            </picture>
+            <a class="enter" href="https://patricktheartist.com" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"></a>
+          </div>
+        </div></div></div>
       </div>
-      <div class="shot"><div class="lens"><div class="strip">
-        <img class="full" src="images/reel/dimitricole-full.jpg" width="960" height="7116" alt="" loading="lazy" decoding="async">
-        <img class="hero" src="images/reel/dimitricole-hero.jpg" width="1600" height="1000" alt="The first screen of dimitricole.com on a desktop" decoding="async">
-      </div></div></div>
-      <figure class="phone"><img src="images/reel/dimitricole-phone.jpg" width="780" height="1688" alt="dimitricole.com on a phone" decoding="async"></figure>
-    </section>
-
-    <section class="scene site" id="rhinelander" data-len="1.5" data-fullh="600" style="--grade:#ffd54a" aria-labelledby="t-rhinelander">
-      <div class="card">
-        <h2 class="title" id="t-rhinelander" tabindex="-1">Rhinelander Auto Body</h2>
-        <p class="year">2019</p>
-        <p class="line">“Quality auto repair and painting, serving the Bronx, Lower Westchester, and Manhattan since 1938.”</p>
-        <p class="sub">The website for Rhinelander Auto Body in the Bronx. Its yellow wordmark sits over a dark photograph of the garage.</p>
-        <a class="visit" href="https://rhinelander.nyc" target="_blank" rel="noopener">Visit rhinelander.nyc<span class="sr"> (opens in a new tab)</span><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5 3h8v8M13 3 3 13" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+      <div class="label beside">
+        <div class="card">
+          <h3 id="patrick-t">Patrick the Artist</h3>
+          <p class="when">2021</p>
+          <p class="medium">Design and build</p>
+          <p class="desc">A portfolio of character art by Patrick, the best artist that I know.</p>
+          <a class="visit" href="https://patricktheartist.com" target="_blank" rel="noopener">Visit patricktheartist.com<span class="vh"> (opens in a new tab)</span></a>
+        </div>
       </div>
-      <div class="shot"><div class="lens"><div class="strip">
-        <img class="full" src="images/reel/rhinelander-full.jpg" width="960" height="600" alt="" loading="lazy" decoding="async">
-        <img class="hero" src="images/reel/rhinelander-hero.jpg" width="1600" height="1000" alt="The first screen of rhinelander.nyc on a desktop" decoding="async">
-      </div></div></div>
-      <figure class="phone"><img src="images/reel/rhinelander-phone.jpg" width="780" height="1688" alt="rhinelander.nyc on a phone" decoding="async"></figure>
-    </section>
+    </article>
 
+    <article class="work hang" id="dimitricole" data-glide style="--d-h: 7944; --d-page: 11571; --m-h: 7597" aria-labelledby="dimitricole-t">
+      <div class="piece">
+        <div class="frame"><div class="mat"><div class="window">
+          <div class="bar">
+            <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="addr" aria-hidden="true">dimitricole.com</span>
+            <button class="hold" type="button"><span class="word">Pause</span><span class="vh"> the dimitricole.com preview</span></button>
+          </div>
+          <div class="screen">
+            <picture>
+              <source media="(max-width: 640px)" type="image/avif" srcset="images/work/dimitricole-mobile.avif">
+              <source media="(max-width: 640px)" srcset="images/work/dimitricole-mobile.jpg">
+              <source type="image/avif" srcset="images/work/dimitricole-desktop.avif">
+              <img src="images/work/dimitricole-desktop.jpg" width="1344" height="7944" alt="Dimitri's own site: his name in a tall serif and his portrait under a starry night sky, with his career below." loading="lazy" decoding="async">
+            </picture>
+            <a class="enter" href="https://dimitricole.com" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"></a>
+            <span class="track" aria-hidden="true"><span class="thumb"></span></span>
+          </div>
+        </div></div></div>
+      </div>
+      <div class="label beside">
+        <div class="card">
+          <h3 id="dimitricole-t">dimitricole.com</h3>
+          <p class="when">2019, redesigned 2026</p>
+          <p class="medium">Design and build</p>
+          <p class="desc">My own site, where my career reads as a descent from a night summit to a daylight trailhead.</p>
+          <a class="visit" href="https://dimitricole.com" target="_blank" rel="noopener">Visit dimitricole.com<span class="vh"> (opens in a new tab)</span></a>
+        </div>
+      </div>
+    </article>
 
-    <div class="frame" aria-hidden="true"><div class="shutter top"></div><div class="shutter bottom"></div></div>
-  </div>
-  <div class="spacer" aria-hidden="true"></div>
+    <article class="work small still hang" id="rhinelander" style="--d-h: 1133; --m-h: 1790" aria-labelledby="rhinelander-t">
+      <div class="piece">
+        <div class="frame"><div class="mat"><div class="window">
+          <div class="bar">
+            <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="addr" aria-hidden="true">rhinelander.nyc</span>
+            <span aria-hidden="true"></span>
+          </div>
+          <div class="screen">
+            <picture>
+              <source media="(max-width: 640px)" type="image/avif" srcset="images/work/rhinelander-mobile.avif">
+              <source media="(max-width: 640px)" srcset="images/work/rhinelander-mobile.jpg">
+              <source type="image/avif" srcset="images/work/rhinelander-desktop.avif">
+              <img src="images/work/rhinelander-desktop.jpg" width="1344" height="1133" alt="The Rhinelander Auto Body website: a yellow wordmark over a dark photograph of the garage." loading="lazy" decoding="async">
+            </picture>
+            <a class="enter" href="https://rhinelander.nyc" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"></a>
+          </div>
+        </div></div></div>
+      </div>
+      <div class="label beside">
+        <div class="card">
+          <h3 id="rhinelander-t">Rhinelander Auto Body</h3>
+          <p class="when">2019</p>
+          <p class="medium">Design and build</p>
+          <p class="desc">The website for Rhinelander Auto Body, an auto body shop in the Bronx.</p>
+          <a class="visit" href="https://rhinelander.nyc" target="_blank" rel="noopener">Visit rhinelander.nyc<span class="vh"> (opens in a new tab)</span></a>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section class="statement hang" id="about" aria-labelledby="about-h">
+    <div>
+      <h2 id="about-h">About</h2>
+      <div class="words">
+        <p>I currently work as a Customer Solutions Director at Ripple in New York, where I have the privilege of helping banks and builders bring tokenization and next-generation payments onto the XRP Ledger.</p>
+        <p>My favorite things to do are snowboard and travel. I hope to someday retire in the mountains, remotely doing tech strategy consulting, unless there is a powder day&hellip;</p>
+      </div>
+      <p class="signed"><svg viewBox="0 0 64 52" aria-hidden="true"><use href="#peak"/></svg>Dimitri Cole Restaino, New York</p>
+    </div>
+  </section>
+
+  <section class="desk hang" id="contact" aria-labelledby="contact-h">
+    <div class="counter">
+      <h2 id="contact-h">Get in touch</h2>
+      <p>Please reach out if you would like to work together.</p>
+      <a class="mail" href="mailto:dimitri.code@gmail.com">dimitri.code<wbr><span class="at">@</span>gmail.com</a>
+      <p class="elsewhere">Or find me on <a href="https://www.linkedin.com/in/dimitricole/" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a>.</p>
+    </div>
+  </section>
 </main>
 
-<footer class="credits" id="contact" aria-labelledby="t-contact">
-  <svg class="mark" viewBox="0 0 100 80" aria-hidden="true" focusable="false"><path fill="#948c80" d="M2 78 30 41l6 3 10-19 6-15 4-7 3 6 6 9 6 7 6 9 6 6 15 38Z"/><path fill="#f3eadb" d="m46 25 6-15 4-7 3 6 6 9 6 7-5 3-4-4-4 6-4-6-4 5-4-5Z"/></svg>
-  <h2 class="title" id="t-contact" tabindex="-1">Let’s make reel seven.</h2>
-  <ul class="contact">
-    <li><a href="mailto:dimitri.code@gmail.com">dimitri.code@gmail.com</a></li>
-    <li><a href="https://www.linkedin.com/in/dimitricole/" target="_blank" rel="noopener">LinkedIn<span class="sr"> (opens in a new tab)</span></a></li>
-  </ul>
-  <div class="about">
-    <h3>About</h3>
-    <p>I currently work as a Customer Solutions Director at Ripple in New York, where I have the privilege of helping banks and builders bring tokenization and next-generation payments onto the XRP Ledger.</p>
-    <p>My favorite things to do are snowboard and travel. I hope to someday retire in the mountains, remotely doing tech strategy consulting, unless there is a powder day...</p>
-  </div>
-  <p class="thanks">Thanks for watching.</p>
+<footer class="hang">
+  <p>&copy; Dimitri Cole Designs.</p>
 </footer>
 
 <script>
 (() => {
-  const root = document.documentElement;
-  const mqPortrait = matchMedia('(orientation: portrait)');
-  const mqNarrow = matchMedia('(max-width: 720px) and (orientation: portrait), (max-width: 720px) and (min-height: 561px), (max-width: 639px)');
-  const stage = document.querySelector('.stage');
-  const frame = document.querySelector('.frame');
-  const spacer = document.querySelector('.spacer');
-  const contact = document.getElementById('contact');
-  const topbar = document.querySelector('.topbar');
-  const openCard = document.querySelector('.open .card'), beatsBox = document.querySelector('.beats');
-  const scenes = [...stage.querySelectorAll('.scene')];
-  const sites = [...document.querySelectorAll('.site')];
-  const reelLinks = [...document.querySelectorAll('.reels a[data-i]')];
-  const countEl = document.querySelector('.count');
-  const tcEl = document.querySelector('.tc');
-  const beats = [...document.querySelectorAll('.beat')];
-  const subs = sites.map(s => s.querySelector('.sub'));
-  const BLANK = scenes.length;             // the black frame after the last reel, before the credits roll
-  const CLOSE = 260, HOLD = 90, OPEN = 340; // one cut takes ~0.7s, so there are never more than 2 a second
-  const FPS = 24, PX_PER_FRAME = 4;
+  // When a frame comes into view, the site inside it glides down as if scrolling itself.
+  // The captures are 1344 pixels wide on a desktop (a 16:10 window shows 840 of them)
+  // and 780 on a phone (a 390 by 844 window shows 1688).
+  const phone = matchMedia('(max-width: 640px)');
+  const calm = matchMedia('(prefers-reduced-motion: reduce)');
+  const SCREEN = 4500, HOLD_TOP = 1600, HOLD_END = 2600, RETURN = 2200;
+  const GLIDE = 'cubic-bezier(.3,.02,.7,.98)', BACK = 'cubic-bezier(.65,0,.35,1)';
 
-  let motion = false, vh = 0, W = 0, H = 0, starts = [], total = 0, lastW = 0, lastH = 0;
-  let shown = -1, want = 0, busy = false, raf = 0, atI = 0, atP = 0, atY = 0, calmI = 0, decW = 0, decH = 0, decP = false;
-  const drift = scenes.map(() => ({ cur: 0, max: 0 }));
-
-  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
-  const len = i => parseFloat(scenes[i].dataset.len) * vh;
-  const driftEl = i => mqNarrow.matches ? null : scenes[i].querySelector('.strip');   // phone captures are one screen: no drift
-
-  function measure() {
-    vh = window.innerHeight; lastW = window.innerWidth; lastH = vh;
-    let acc = 0;
-    starts = scenes.map((s, i) => { const at = acc; acc += len(i); return at; });
-    total = acc;
-    spacer.style.height = total + 'px';
-    measureFrame();
-    sites.forEach(placePhone);
-  }
-
-  /* On phones a reel's mockup shows only if it stands at least 120px tall. This is decided as the reel cuts in and on a
-     real relayout, never on a toolbar-sized resize mid-reel, so the phone never pops in or out while you watch. */
-  const PHONE_MIN = 120;
-  function placePhone(site) {
-    site.classList.remove('no-phone');
-    site.classList.toggle('no-phone', mqNarrow.matches && site.querySelector('.phone').offsetHeight < PHONE_MIN);
-  }
-
-  /* the picture between the bars and how far each desktop screenshot drifts in it; the scroll track stays as it is */
-  function measureFrame() {
-    W = frame.clientWidth; H = frame.clientHeight;
-    scenes.forEach((s, i) => {
-      if (!s.classList.contains('site')) return;
-      /* the screenshot may drift as far as it still covers the picture, and plays out over at most 1.6 pictures; only the
-         coverage bound is enforced at once (so no black shows below it), and render() eases toward the rest */
-      const full = W * parseFloat(s.dataset.fullh) / 960, cover = mqNarrow.matches ? 0 : Math.max(0, full - H);
-      s.classList.toggle('short', !mqNarrow.matches && full < H);
-      drift[i].max = Math.min(cover, 1.6 * H);
-      drift[i].cur = clamp(drift[i].cur, -cover, 0);
-      s.querySelector('.strip').style.transform = '';
-    });
-  }
-
-  function sceneAt(y) {
-    if (y > total - 0.12 * vh) return BLANK;
-    let i = 0;
-    for (let k = 0; k < scenes.length; k++) if (y >= starts[k] - 1) i = k;
-    return i;
-  }
-  const progress = (i, y) => (i >= 0 && i < BLANK) ? clamp((y - starts[i]) / len(i), 0, 1) : 1;
-
-  function show(i) {
-    if (scenes[i]?.classList.contains('site')) placePhone(scenes[i]);
-    scenes.forEach((s, k) => s.classList.toggle('is-on', k === i));
-    shown = i;
-    if (i < BLANK && drift[i]) drift[i].cur = -progress(i, scrollY) * drift[i].max;
-    render(true);
-  }
-
-  function cut() {
-    busy = true;
-    root.classList.add('is-shut');
-    setTimeout(() => {
-      show(want);
-      setTimeout(() => {
-        if (shown !== BLANK) root.classList.remove('is-shut');
-        setTimeout(() => { busy = false; if (want !== shown) cut(); }, OPEN);
-      }, HOLD);
-    }, CLOSE);
-  }
-
-  /* the reel strip, counter and grade follow the picture, so they change on the cut */
-  function chrome(y) {
-    const at = shown < 0 ? want : shown, p = progress(at, y);
-    reelLinks.forEach((a, k) => {
-      const n = k + 1;
-      a.style.setProperty('--fill', n < at ? 1 : n === at ? p.toFixed(3) : 0);
-      if (n === at) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
-    });
-    const label = at === 0 ? 'Six reels,\nnewest first' : at === BLANK ? 'Credits' : `Reel ${at} of 6`;
-    if (countEl.textContent !== label) countEl.textContent = label;
-    const g = at > 0 && at < BLANK ? scenes[at].style.getPropertyValue('--grade') : '';
-    root.style.setProperty('--grade', g || 'var(--tungsten)');
-    root.classList.toggle('in-credits', y > total + 4);
-    const f = Math.floor(y / PX_PER_FRAME), pad = n => String(n).padStart(2, '0');
-    tcEl.textContent = `${pad(Math.floor(f / (FPS * 3600)))}:${pad(Math.floor(f / (FPS * 60)) % 60)}:${pad(Math.floor(f / FPS) % 60)}:${pad(f % FPS)}`;
-  }
-
-  function tick() { raf = 0; render(false); }
-  function render(snap) {
-    if (!motion) return;
-    const y = scrollY;
-    const i = sceneAt(y);
-    atI = i; atP = progress(i, y); atY = y;
-    if (i !== want) { want = i; if (!busy && want !== shown) cut(); }
-    chrome(y);
-    let moving = false;
-    if (shown === 0) {
-      const p = progress(0, y), b = p < .34 ? 0 : p < .67 ? 1 : 2;
-      beats.forEach((el, k) => el.classList.toggle('is-on', k === b));
-    } else if (shown > 0 && shown < BLANK) {
-      /* the reel on screen always shows its own drift, even mid-cut; it eases toward the scroll only while it is the one wanted */
-      const d = drift[shown];
-      if (want === shown) {
-        const target = -progress(shown, y) * d.max;
-        d.cur = snap ? target : d.cur + (target - d.cur) * 0.12;
-        if (Math.abs(target - d.cur) < 0.4) d.cur = target; else moving = true;
-      }
-      const el = driftEl(shown);
-      if (el) el.style.transform = `translate3d(0, ${d.cur.toFixed(1)}px, 0)`;
-    }
-    if (moving && !raf) raf = requestAnimationFrame(tick);
-  }
-  const onScroll = () => { if (!raf) raf = requestAnimationFrame(tick); };
-
-  function jump(i) {
-    window.scrollTo(0, Math.ceil(starts[i]) + 1);
-    render(false);
-  }
-
-  /* the reel starts where the link points, or where you last were in the calm sequence when it comes back on */
-  function enable() {
-    const from = root.classList.contains('motion') ? -1 : calmI;
-    motion = true;
-    root.classList.add('motion', 'is-shut');
-    measure();
-    const to = from >= 0 ? from : location.hash === '#contact' ? BLANK : scenes.findIndex(s => '#' + s.id === location.hash);
-    if (to === BLANK) contact.scrollIntoView();
-    else if (to >= 0) window.scrollTo(0, to ? Math.ceil(starts[to]) + 1 : 0);
-    want = sceneAt(scrollY);
-    show(want);
-    setTimeout(() => { if (shown !== BLANK && !busy) root.classList.remove('is-shut'); }, 420);
-  }
-
-  function disable() {
-    const from = motion ? atI : -1;
-    motion = false;
-    root.classList.remove('motion', 'is-shut', 'in-credits');
-    spacer.style.height = '';
-    scenes.forEach(s => s.classList.remove('is-on'));
-    document.querySelectorAll('.strip').forEach(el => { el.style.transform = ''; });
-    shown = -1;
-    if (from === 0) window.scrollTo(0, 0);
-    else if (from > 0) {
-      const target = from < BLANK ? scenes[from] : contact;
-      target.scrollIntoView();
-      if (target.contains(document.activeElement)) document.activeElement.scrollIntoView({ block: 'center' });
-    }
-    calmI = from >= 0 ? from : calmAt();
-    calm();
-  }
-
-  /* reel or calm: decided at load in the head, then again on a new width, orientation or motion preference,
-     or a height change of 150px or more, so a browser toolbar showing or hiding never switches it mid-scroll */
-  function decide(reel) {
-    decW = innerWidth; decH = innerHeight; decP = mqPortrait.matches;
-    if (reel !== motion) (reel ? enable : disable)();
-  }
-
-  /* where you are in the calm sequence: 0 at the opening, a reel's number, or BLANK in the credits */
-  function calmAt() {
-    if (contact.getBoundingClientRect().top < innerHeight * .5) return BLANK;
-    let at = 0;
-    sites.forEach((s, k) => { if (s.getBoundingClientRect().top < innerHeight * .5) at = k + 1; });
-    return at;
-  }
-
-  /* calm sequence: the reel strip in the top bar still shows where you are, without any motion. A scroll that comes
-     with a new page height is a layout change (zoom, print, a theme) rather than you, so it keeps the place you were at */
-  let calmH = 0;
-  function calm() {
-    if (motion) return;
-    const at = calmAt(), h = root.scrollHeight;
-    if (h === calmH) calmI = at;
-    calmH = h;
-    reelLinks.forEach((a, k) => {
-      a.style.setProperty('--fill', k + 1 <= at ? 1 : 0);
-      if (k + 1 === at) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
-    });
-  }
-
-  window.addEventListener('scroll', () => { if (motion) onScroll(); else calm(); }, { passive: true });
-  /* a new layout keeps your place, from the last frame drawn since the browser may already have moved scrollY:
-     in a reel by its progress, and past the last reel by how far the credits have rolled */
-  function relayout() {
-    const i = atI, p = atP, past = atY - total, oldVh = vh;
-    measure();
-    window.scrollTo(0, i < BLANK ? starts[i] + p * len(i) : total + Math.min(past, oldVh) * vh / oldVh + Math.max(0, past - oldVh));
-    show(sceneAt(scrollY)); want = shown;
-    if (!busy) root.classList.toggle('is-shut', shown === BLANK);
-  }
-  window.addEventListener('resize', () => {
-    if (innerWidth !== decW || mqPortrait.matches !== decP || Math.abs(innerHeight - decH) >= 150) decide(matchMedia(REEL).matches);
-    if (motion && (innerWidth !== lastW || Math.abs(innerHeight - lastH) >= 150)) relayout();
-  });
-  mqNarrow.addEventListener('change', () => { if (motion) relayout(); });
-
-  /* The reel runs only while everything fits: the top bar whole, each card inside its picture, each subtitle inside the
-     bottom bar and clear of the counter. Larger or more widely spaced text that does not fit settles the page into the calm sequence until decide()
-     runs again, so it never flaps at one size. */
-  function fit() {
-    if (!motion) return;
-    /* first give the bottom bar the height of the tallest subtitle as it wraps now: its lines times its own line height */
-    const rg = document.createRange();
-    const lines = el => (rg.selectNodeContents(el), new Set([...rg.getClientRects()].filter(r => r.width).map(r => Math.round(r.top))).size);
-    const room = Math.floor(Math.max(...[...subs, ...beats].map(el => lines(el) * parseFloat(getComputedStyle(el).lineHeight)))) + 'px';
-    if (root.style.getPropertyValue('--sub-h') !== room) {
-      requestAnimationFrame(() => { if (motion) { root.style.setProperty('--sub-h', room); measureFrame(); render(true); fit(); } });
-      return;
-    }
-    /* the picture changed size without a full relayout (a toolbar, or a window edge dragged a little): each screenshot
-       gets its new drift range, and eases to it */
-    if (frame.clientWidth !== W || frame.clientHeight !== H) {
-      measureFrame(); render(false);
-      /* a window dragged shorter can shrink the shown phone under the floor; then it steps aside (it never pops in mid-reel) */
-      const on = scenes[shown];
-      if (on?.classList.contains('site') && !on.classList.contains('no-phone') && on.querySelector('.phone').offsetHeight < PHONE_MIN) placePhone(on);
-    }
-    const box = el => el.getBoundingClientRect(), f = box(frame), s = box(stage), bar = box(topbar);
-    const label = countEl.offsetParent && box(countEl), tc = label && box(tcEl), at = shown < 0 ? want : shown;
-    const inBar = el => { const r = box(el); return r.top >= bar.top - 1 && r.bottom <= bar.bottom + 1 && r.left >= -1 && r.right <= root.clientWidth + 1; };
-    const inFrame = (el, right) => {
-      const r = box(el);
-      return r.top >= f.top - 1 && r.bottom <= f.bottom + 1 && [...el.children].every(c => box(c).right - s.left <= right + 1 || c.matches('.sub, .beats'));
+  const works = [...document.querySelectorAll('.work')].map((el) => {
+    const s = {
+      el,
+      screen: el.querySelector('.screen'),
+      shot: el.querySelector('.screen img'),
+      glides: el.hasAttribute('data-glide'),
+      piece: el.querySelector('.piece'),
+      thumb: el.querySelector('.thumb'),
+      word: el.querySelector('.hold .word'),
+      anims: [], seen: false, over: false, hover: false, held: calm.matches
     };
-    const inBottom = (el, labelled) => {
-      const r = box(el);
-      return r.top >= f.bottom - 1 && r.bottom <= s.bottom + 1 && el.scrollHeight <= el.clientHeight + 1 &&
-        !(labelled && label && (label.right > r.left || tc.left < r.right));
-    };
-    let fits = [...topbar.children].every(inBar) && inFrame(openCard, stage.clientWidth) && beats.every(b => inBottom(b)) && inBottom(beatsBox, at === 0);
-    sites.forEach((site, k) => {
-      const card = site.querySelector('.card'), phone = site.querySelector('.phone');
-      fits = fits && inFrame(card, mqNarrow.matches ? stage.clientWidth : phone.offsetLeft) && inBottom(subs[k], at === k + 1);
+    s.shot.addEventListener('load', () => update(s));
+    if (s.glides) {
+      s.piece.addEventListener('pointerleave', () => { s.over = s.hover = false; update(s); });
+      el.querySelector('.hold').addEventListener('click', () => {
+        s.held = !s.held;
+        if (!s.held) s.hover = false;
+        update(s);
+      });
+    }
+    return s;
+  });
+
+  // a capture belongs to the current layout once it has fully arrived at the matching width
+  const fits = (s) => s.shot.complete && s.shot.naturalWidth === (phone.matches ? 780 : 1344);
+
+  // A frame holds still while the mouse rests on it. Browsers also report the pointer
+  // entering when the page scrolls a frame under a resting cursor, so only movement counts.
+  let mx, my;
+  document.addEventListener('pointermove', (e) => {
+    const moved = e.clientX !== mx || e.clientY !== my;
+    mx = e.clientX; my = e.clientY;
+    if (!moved || e.pointerType !== 'mouse') return;
+    works.forEach((s) => {
+      const over = s.glides && s.piece.contains(e.target);
+      if (over !== s.over) { s.over = over; s.hover = over; update(s); }
     });
-    if (!fits && document.fonts.status === 'loaded') requestAnimationFrame(() => motion && disable());
+  }, { passive: true });
+
+  function build(s) {
+    s.anims.forEach((a) => a.cancel());
+    const css = getComputedStyle(s.el);
+    const small = phone.matches;
+    const view = small ? 1688 : 840;
+    const h = parseFloat(css.getPropertyValue(small ? '--m-h' : '--d-h'));
+    const page = small ? h : parseFloat(css.getPropertyValue('--d-page'));
+    const glide = (h - view) / view * SCREEN;
+    const total = HOLD_TOP + glide + HOLD_END + RETURN;
+    const a = HOLD_TOP / total, b = (HOLD_TOP + glide) / total, c = (HOLD_TOP + glide + HOLD_END) / total;
+    const frames = (end) => [
+      { transform: 'translateY(0)', offset: 0 },
+      { transform: 'translateY(0)', offset: a, easing: GLIDE },
+      { transform: `translateY(${end})`, offset: b },
+      { transform: `translateY(${end})`, offset: c, easing: BACK },
+      { transform: 'translateY(0)', offset: 1 }
+    ];
+    const timing = { duration: total, iterations: Infinity };
+    s.anims = [s.shot.animate(frames(`${(view / h - 1) * 100}%`), timing)];
+    // the scrollbar measures the whole page, which can run on past the capture
+    s.thumb.style.height = `${view / page * 100}%`;
+    s.anims.push(s.thumb.animate(frames(`${(h - view) / view * 100}%`), timing));
+    s.anims.forEach((x) => x.pause());
   }
-  const watch = new ResizeObserver(fit);
-  [stage, countEl, ...sites.map(s => s.querySelector('.card'))].forEach(el => watch.observe(el));
-  document.fonts.ready.then(() => { if (motion) sites.forEach(placePhone); fit(); });
 
-  /* a change of motion preference, contrast theme or print media decides again; printing uses the calm sequence and
-     comes back to the place you printed from, whatever the print layout did to the scroll position meanwhile */
-  let printing = false, printFrom = 0;
-  ['(prefers-reduced-motion: no-preference)', '(forced-colors: active)', 'print']
-    .forEach(q => matchMedia(q).addEventListener('change', () => { if (!printing) decide(matchMedia(REEL).matches); }));
-  window.addEventListener('beforeprint', () => { printing = true; printFrom = motion ? atI : calmI; decide(false); });
-  window.addEventListener('afterprint', () => { printing = false; calmI = printFrom; decide(matchMedia(REEL).matches); });
-
-  /* in-page links to a reel jump straight to it with a single cut */
-  document.addEventListener('click', e => {
-    if (!motion) return;
-    const a = e.target.closest('a[href^="#"]');
-    if (!a) return;
-    const i = scenes.findIndex(s => '#' + s.id === a.getAttribute('href'));
-    if (i < 0) return;
-    e.preventDefault();
-    jump(i);
-    history.replaceState(null, '', a.getAttribute('href'));
-    scenes[i].querySelector('[tabindex="-1"]').focus({ preventScroll: true });
-  });
-
-  /* keyboard focus on a link in another reel brings that reel on screen */
-  document.addEventListener('focusin', e => {
-    if (!motion) return;
-    const s = e.target.closest('.scene');
-    if (!s) return;
-    const i = scenes.indexOf(s);
-    if (i !== sceneAt(scrollY)) jump(i);
-  });
-
-  /* a link straight to a reel (#glitch) lands on that reel, after the browser's own jump to the fragment */
-  function followHash() {
-    if (!motion) return;
-    const i = scenes.findIndex(s => '#' + s.id === location.hash);
-    if (i > 0) jump(i);
+  function update(s) {
+    // after the phone turns, the browser can go on painting the other layout's capture,
+    // stretched, until the new one arrives, so a capture shows only once it fits
+    s.el.classList.toggle('swap', !fits(s));
+    if (!s.glides) return;
+    const go = s.seen && fits(s) && !s.hover && !s.held;
+    s.anims.forEach((x) => (go ? x.play() : x.pause()));
+    s.word.textContent = s.held ? 'Play' : 'Pause';
   }
-  window.addEventListener('load', () => requestAnimationFrame(followHash));
-  window.addEventListener('hashchange', followHash);
 
-  decide(root.classList.contains('motion'));
-  calm();
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const s = works.find((w) => w.screen === entry.target);
+      s.seen = entry.isIntersecting && entry.intersectionRatio >= 0.35;
+      update(s);
+    });
+  }, { threshold: [0, 0.35] });
+
+  // each capture starts loading well before its frame scrolls into view
+  const ahead = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.querySelector('img').loading = 'eager';
+      ahead.unobserve(entry.target);
+    });
+  }, { rootMargin: '1600px 0px' });
+
+  works.forEach((s) => {
+    if (s.glides) { build(s); io.observe(s.screen); }
+    ahead.observe(s.screen);
+    update(s);
+  });
+  phone.addEventListener('change', () => works.forEach((s) => { if (s.glides) build(s); update(s); }));
+  calm.addEventListener('change', () => works.forEach((s) => { s.held = calm.matches; update(s); }));
+  addEventListener('load', () => setTimeout(() => document.documentElement.classList.add('loaded')), { once: true });
 })();
 </script>
 </body>
